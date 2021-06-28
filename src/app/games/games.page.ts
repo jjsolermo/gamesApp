@@ -20,8 +20,7 @@ export class GamesPage implements OnInit {
   }
 
   navigateToSpace(){
-    console.log('soy un boton');
-    //this.router.navigateByUrl('/space');
+    this.router.navigateByUrl('/games/space');
   }
 
   navigateToDDice(){

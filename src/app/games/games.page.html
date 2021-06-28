@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title id="titleGame">Games</ion-title>
-    <ion-button id="logout" fill="clear" click="logOut()">LogOut</ion-button>
+    <ion-button id="logout" fill="clear" (click)="logOut()">LogOut</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="buttonSet">
-      <ion-button color="primary" click="navigateToSpace()">Space Empire 4X</ion-button>
+      <ion-button color="primary" (click)="navigateToSpace()">Space Empire 4X</ion-button>
       <br>
-      <ion-button color="primary" click="navigateToDDice()">D-Dice</ion-button>
+      <ion-button color="primary" (click)="navigateToDDice()">D-Dice</ion-button>
   </div>
 </ion-content>
