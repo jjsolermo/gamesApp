@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Ship } from 'src/app/services/ship';
+import { DbService } from '../../../services/db.service';
+
 
 @Component({
   selector: 'app-ships',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShipsPage implements OnInit {
 
-  constructor() { }
+  shipList : Ship[]= [];
+
+  constructor(private db: DbService) { }
 
   ngOnInit() {
+
+    this.db.dbState().subscribe((res) => {
+      if(res){
+        this.db.fetchShipsOwner().subscribe(item => {
+          this.shipList = item
+          
+        })
+      }
+    });
+
+
   }
 
 }

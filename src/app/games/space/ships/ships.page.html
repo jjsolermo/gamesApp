@@ -1,9 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ships</ion-title>
+    <ion-title>Owner Ships</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list *ngFor="ship of shipList">
+    <ion-item>
+      <ion-label>
+        <h2>{{ship.Type}}</h2>
+        <h3>I{ship.Class}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

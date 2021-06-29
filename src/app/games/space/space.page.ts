@@ -15,8 +15,8 @@ import { Ship } from 'src/app/services/ship';
 })
 export class SpacePage implements OnInit {
 
-  turnList: Turn[] = []
-  shipList:Ship[] = []
+  turnList: Turn[] = [];
+  shipList:Ship[] = [];
 
   ionicForm :FormGroup;
   total= 0;
@@ -58,6 +58,9 @@ export class SpacePage implements OnInit {
 
 navigateToGames(){
   this.router.navigateByUrl('/games');
+}
+goToOwnerShips(){
+  this.router.navigateByUrl('/games/space/ships');
 }
 
 public updateCarry(e) :void{
