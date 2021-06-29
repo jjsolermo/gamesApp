@@ -99,7 +99,7 @@ export class DbService {
            });
         }
       }
-      this.shipList.next(items);
+      this.turnList.next(items);
     });
 
   // Add

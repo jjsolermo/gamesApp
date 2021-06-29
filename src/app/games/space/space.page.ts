@@ -42,11 +42,12 @@ export class SpacePage implements OnInit {
         if(res){
           this.db.fetchTurn().subscribe(item => {
             this.Turn = item
-            if(this.Turn){
+            console.log(this.Turn);
+            /* if(this.Turn){
               this.carryValue = this.Turn[0].CPS
             }else{
               this.carryValue = 0
-            }
+            } */
             
           })
         }

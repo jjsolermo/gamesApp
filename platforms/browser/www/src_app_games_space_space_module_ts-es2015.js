@@ -142,12 +142,12 @@ let SpacePage = class SpacePage {
             if (res) {
                 this.db.fetchTurn().subscribe(item => {
                     this.Turn = item;
-                    if (this.Turn) {
-                        this.carryValue = this.Turn[0].CPS;
-                    }
-                    else {
-                        this.carryValue = 0;
-                    }
+                    console.log(this.Turn);
+                    /* if(this.Turn){
+                      this.carryValue = this.Turn[0].CPS
+                    }else{
+                      this.carryValue = 0
+                    } */
                 });
             }
         });
@@ -291,7 +291,8 @@ let DbService = class DbService {
                     });
                 }
             }
-            this.shipList.next(items);
+            console.log(items);
+            this.turnList.next(items);
         });
         // Add
         /* addSong(artist_name, song_name) {

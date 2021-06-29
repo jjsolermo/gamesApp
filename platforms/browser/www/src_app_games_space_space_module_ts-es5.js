@@ -275,12 +275,12 @@
               if (res) {
                 _this.db.fetchTurn().subscribe(function (item) {
                   _this.Turn = item;
-
-                  if (_this.Turn) {
-                    _this.carryValue = _this.Turn[0].CPS;
-                  } else {
-                    _this.carryValue = 0;
-                  }
+                  console.log(_this.Turn);
+                  /* if(this.Turn){
+                    this.carryValue = this.Turn[0].CPS
+                  }else{
+                    this.carryValue = 0
+                  } */
                 });
               }
             });
@@ -517,7 +517,9 @@
                 }
               }
 
-              _this5.shipList.next(items);
+              console.log(items);
+
+              _this5.turnList.next(items);
             }); // Add
 
             /* addSong(artist_name, song_name) {
