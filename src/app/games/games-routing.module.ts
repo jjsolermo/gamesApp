@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'space',
     loadChildren: () => import('./space/space.module').then( m => m.SpacePageModule)
+  },  {
+    path: 'ddice',
+    loadChildren: () => import('./ddice/ddice.module').then( m => m.DdicePageModule)
   }
+
 ];
 
 @NgModule({

@@ -7,7 +7,16 @@ const routes: Routes = [
   {
     path: '',
     component: SpacePage
+  },
+  {
+    path: 'ships',
+    loadChildren: () => import('./ships/ships.module').then( m => m.ShipsPageModule)
+  },
+  {
+    path: 'techs',
+    loadChildren: () => import('./techs/techs.module').then( m => m.TechsPageModule)
   }
+
 ];
 
 @NgModule({

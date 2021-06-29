@@ -1,0 +1,64 @@
+.headerSpace{
+    display: contents;
+}
+
+.headerTitle{
+    text-align: center;
+    margin: 2rem;
+}
+ion-menu-button {
+    color: var(--ion-color-primary);
+  }
+
+  .menuButton{
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .inputCp {
+    text-align: center;
+    position: absolute;
+    left: 26%;
+  }
+
+  .carryOver{
+    margin-top: 1rem;
+    text-align: center;
+    padding: 0;
+  }
+
+  .carry{
+    margin-top: 2em;
+  }
+
+  .colony{
+    margin-top: 7em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  .mineral{
+    margin-top: 12em;
+  }
+  .pipe{
+    margin-top: 17em;
+  }
+  .manteninance{
+    margin-top: 25em;
+    color: red;
+  }
+  .turnOrderBid{
+    margin-top: 29em;
+    color: red;
+  }
+  .total{
+    position: absolute;
+    margin-top: 22em;
+    background: gainsboro;
+    text-align: center;
+    width: 100%;
+  }
+  .formClass{
+    margin: 0;
+  }

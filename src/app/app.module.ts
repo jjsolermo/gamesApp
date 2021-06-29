@@ -7,6 +7,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { SQLite } from '@ionic-native/sqlite/ngx';
+import { HttpClientModule } from '@angular/common/http';
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -20,8 +24,11 @@ import { environment } from '../environments/environment';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },AngularFirestoreModule],
+    AngularFirestoreModule,
+    HttpClientModule,
+  ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },AngularFirestoreModule,SQLite,
+    SQLitePorter,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
