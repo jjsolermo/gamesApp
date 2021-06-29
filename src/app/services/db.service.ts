@@ -15,6 +15,7 @@ export class DbService {
   private storage: SQLiteObject;
   shipList = new BehaviorSubject([]);
   turnList = new BehaviorSubject([]);
+  shipListOwner = new BehaviorSubject([]);
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
@@ -43,6 +44,10 @@ export class DbService {
     return this.shipList.asObservable();
   }
 
+  fetchShipsOwner(): Observable<Ship[]> {
+    return this.shipListOwner.asObservable();
+  }
+
   fetchTurn(): Observable<Turn[]> {
     return this.turnList.asObservable();
   }
@@ -57,6 +62,8 @@ export class DbService {
           .then(_ => {
 
             this.getShips();
+            this.getTurn();
+            this.getShipsOwner();
             this.isDbReady.next(true);
           })
           .catch(error => console.error(error));
@@ -65,7 +72,7 @@ export class DbService {
 
   // Get list
   getShips(){
-    return this.storage.executeSql('SELECT * FROM ships', []).then(res => {
+    return this.storage.executeSql('SELECT * FROM ships where Buy = 0', []).then(res => {
       let items: Ship[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) { 
@@ -87,6 +94,37 @@ export class DbService {
     
   }
 
+  getShipsOwner(){
+    return this.storage.executeSql('SELECT * FROM ships where Buy = 1', []).then(res => {
+      let items: Ship[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            id: res.rows.item(i).Id,
+            Type: res.rows.item(i).Type,
+            Class: res.rows.item(i).Class,
+            CP:res.rows.item(i).CP,
+            Attack_Strength: res.rows.item(i).Attack_Strength,
+            Defense_Strength: res.rows.item(i).Defense_Strength,
+            Hull_Size: res.rows.item(i).Hull_Size,
+            Description: res.rows.item(i).Description,
+            Buy: res.rows.item(i).Buy,
+           });
+        }
+      }
+      this.shipList.next(items);
+    });
+    
+  }
+
+  updateTurn(id, turnObject: Turn) {
+    let data = [turnObject.CPS,];
+    return this.storage.executeSql(`UPDATE turn SET CPS = ? WHERE id = ${id}`, data)
+    .then(data => {
+      this.getTurn();
+    })
+  }
+
   getTurn(){
     return this.storage.executeSql('SELECT * FROM turn', []).then(res => {
       let items: Turn[] = [];
@@ -95,7 +133,6 @@ export class DbService {
           items.push({ 
             Id: res.rows.item(i).Id,
             CPS: res.rows.item(i).CPS,
-            
            });
         }
       }
