@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { Turn } from './../../services/turn';
+import { Ship } from 'src/app/services/ship';
 
 
 
@@ -14,7 +15,8 @@ import { Turn } from './../../services/turn';
 })
 export class SpacePage implements OnInit {
 
-  Turn: Turn[] = []
+  turnList: Turn[] = []
+  shipList:Ship[] = []
 
   ionicForm :FormGroup;
   total= 0;
@@ -41,13 +43,13 @@ export class SpacePage implements OnInit {
       this.db.dbState().subscribe((res) => {
         if(res){
           this.db.fetchTurn().subscribe(item => {
-            this.Turn = item
-            console.log(this.Turn);
-            /* if(this.Turn){
-              this.carryValue = this.Turn[0].CPS
+            this.turnList = item
+            console.log(item);
+            if(this.turnList.length > 0){
+              this.carryValue = this.turnList[0].CPS
             }else{
               this.carryValue = 0
-            } */
+            }
             
           })
         }
