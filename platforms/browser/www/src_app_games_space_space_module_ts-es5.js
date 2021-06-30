@@ -294,15 +294,6 @@
                 });
               }
             });
-            this.db.dbState().subscribe(function (res) {
-              console.log(res);
-
-              if (res) {
-                _this.db.fetchShips().subscribe(function (item) {
-                  console.log(item);
-                });
-              }
-            });
           }
         }, {
           key: "navigateToGames",
@@ -580,7 +571,7 @@
                 }
               }
 
-              _this6.shipList.next(items);
+              _this6.shipListOwner.next(items);
             });
           }
         }, {

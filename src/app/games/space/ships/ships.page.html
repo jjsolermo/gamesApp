@@ -6,11 +6,29 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let ship of shipList; let i = index">
-      <ion-label>
-        <h2>{{ship.Type}}</h2>
-        <h3>{{ship.Class}}</h3>
-      </ion-label>
+    <!--<ion-item *ngFor="let ship of ships |async">-->
+      <ion-item *ngFor="let ship of shipFake">
+        <p>a saco</p>
+          <ion-label>
+            <h2>{{ship.Type}}</h2>
+            <h3>{{ship.Class}}</h3>
+          </ion-label>
+          <ion-label>
+            <h2>Attack</h2>
+            <h3>{{ship.Attack_Strength}}</h3>
+          </ion-label>
+          <ion-label>
+            <h2>Defense</h2>
+            <h3>{{ship.Defense_Strength}}</h3>
+          </ion-label>
+          <ion-label>
+            <h2>Hull Size</h2>
+            <h3>{{ship.Hull_Size}}</h3>
+          </ion-label>
+          <ion-label>
+            <h2>Destroy</h2>
+            <ion-button class="headerSpace" color="danger"> <ion-icon name="trash"></ion-icon></ion-button>
+          </ion-label>
     </ion-item>
   </ion-list>
 

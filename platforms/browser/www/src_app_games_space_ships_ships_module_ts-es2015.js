@@ -92,12 +92,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ShipsPage": function() { return /* binding */ ShipsPage; }
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 64762);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 64762);
 /* harmony import */ var _raw_loader_ships_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./ships.page.html */ 90678);
 /* harmony import */ var _ships_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ships.page.scss */ 74493);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 37716);
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/db.service */ 73773);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 39895);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 39895);
 
 
 
@@ -114,9 +114,8 @@ let ShipsPage = class ShipsPage {
         this.db.dbState().subscribe((res) => {
             console.log(res);
             if (res) {
-                this.db.getShipsOwner().then((item) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-                    console.log(yield item);
-                }));
+                this.ships = this.db.fetchShipsOwner();
+                console.log(this.ships);
             }
         });
     }
@@ -125,10 +124,10 @@ let ShipsPage = class ShipsPage {
     }
 };
 ShipsPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router },
     { type: _services_db_service__WEBPACK_IMPORTED_MODULE_2__.DbService }
 ];
-ShipsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+ShipsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-ships',
         template: _raw_loader_ships_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -160,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let ship of shipList; let i = index\">\r\n      <ion-label>\r\n        <h2>{{ship.Type}}</h2>\r\n        <h3>{{ship.Class}}</h3>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let ship of ships |async\">\r\n      <ion-label>\r\n        <h2>{{ship.Type}}</h2>\r\n        <h3>{{ship.Class}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Attack</h2>\r\n        <h3>{{ship.Attack_Strength}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Defense</h2>\r\n        <h3>{{ship.Defense_Strength}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Hull Size</h2>\r\n        <h3>{{ship.Hull_Size}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <ion-button class=\"headerSpace\" color=\"danger\"> <ion-icon name=\"trash\"></ion-icon>&nbsp;&nbsp; Destroy</ion-button>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
 
 /***/ })
 

@@ -56,15 +56,6 @@ export class SpacePage implements OnInit {
           })
         }
       });
-
-      this.db.dbState().subscribe((res) => {
-        console.log(res)
-        if(res){
-          this.db.fetchShips().subscribe(  item => {
-            console.log(item);   
-          })
-        }
-      });
 }
 
 navigateToGames(){

@@ -112,7 +112,7 @@ export class DbService {
            });
         }
       }
-      this.shipList.next(items);
+      this.shipListOwner.next(items);
     });
     
   }

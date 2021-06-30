@@ -157,14 +157,6 @@ let SpacePage = class SpacePage {
                 });
             }
         });
-        this.db.dbState().subscribe((res) => {
-            console.log(res);
-            if (res) {
-                this.db.fetchShips().subscribe(item => {
-                    console.log(item);
-                });
-            }
-        });
     }
     navigateToGames() {
         this.router.navigateByUrl('/games');
@@ -339,7 +331,7 @@ let DbService = class DbService {
                     });
                 }
             }
-            this.shipList.next(items);
+            this.shipListOwner.next(items);
         });
     }
     updateTurn(id, turnObject) {

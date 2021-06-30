@@ -179,7 +179,7 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! tslib */
       64762);
       /* harmony import */
@@ -209,7 +209,7 @@
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
       39895);
 
@@ -231,29 +231,8 @@
               console.log(res);
 
               if (res) {
-                _this.db.getShipsOwner().then(function (item) {
-                  return (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(_this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                    return regeneratorRuntime.wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            _context.t0 = console;
-                            _context.next = 3;
-                            return item;
-
-                          case 3:
-                            _context.t1 = _context.sent;
-
-                            _context.t0.log.call(_context.t0, _context.t1);
-
-                          case 5:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee);
-                  }));
-                });
+                _this.ships = _this.db.fetchShipsOwner();
+                console.log(_this.ships);
               }
             });
           }
@@ -269,13 +248,13 @@
 
       _ShipsPage.ctorParameters = function () {
         return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router
         }, {
           type: _services_db_service__WEBPACK_IMPORTED_MODULE_2__.DbService
         }];
       };
 
-      _ShipsPage = (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+      _ShipsPage = (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-ships',
         template: _raw_loader_ships_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_ships_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
@@ -315,7 +294,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let ship of shipList; let i = index\">\r\n      <ion-label>\r\n        <h2>{{ship.Type}}</h2>\r\n        <h3>{{ship.Class}}</h3>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n";
+      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let ship of ships |async\">\r\n      <ion-label>\r\n        <h2>{{ship.Type}}</h2>\r\n        <h3>{{ship.Class}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Attack</h2>\r\n        <h3>{{ship.Attack_Strength}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Defense</h2>\r\n        <h3>{{ship.Defense_Strength}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Hull Size</h2>\r\n        <h3>{{ship.Hull_Size}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <ion-button class=\"headerSpace\" color=\"danger\"> <ion-icon name=\"trash\"></ion-icon>&nbsp;&nbsp; Destroy</ion-button>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n";
       /***/
     }
   }]);
