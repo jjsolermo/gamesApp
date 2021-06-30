@@ -56,6 +56,15 @@ export class SpacePage implements OnInit {
           })
         }
       });
+
+      this.db.dbState().subscribe((res) => {
+        console.log(res)
+        if(res){
+          this.db.fetchShips().subscribe(  item => {
+            console.log(item);   
+          })
+        }
+      });
 }
 
 navigateToGames(){
@@ -94,10 +103,8 @@ public updateUpdate(e) :void{
 cpForm(){
   let turnForm = new Turn(); 
     turnForm.CPS = this.remaining;
-
+    this.total=  this.remaining;
   this.db.updateTurn(0, turnForm).then((data) => {
-    console.log(data);
-   this.total=  this.remaining;
    this.subTotal= 0;
    this.carryValue = 0;
    this.colonyValue= 0;

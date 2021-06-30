@@ -118,7 +118,7 @@ export class DbService {
   }
 
   updateTurn(id, turnObject: Turn) {
-    let data = [turnObject.CPS,];
+    let data = [turnObject.CPS];
     return this.storage.executeSql(`UPDATE turn SET CPS = ? WHERE id = ${id}`, data)
     .then(data => {
       this.getTurn();

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Ship } from 'src/app/services/ship';
 import { DbService } from '../../../services/db.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -12,20 +14,24 @@ export class ShipsPage implements OnInit {
 
   shipList : Ship[]= [];
 
-  constructor(private db: DbService) { }
+  constructor(private router: Router, private db: DbService) { }
 
   ngOnInit() {
 
     this.db.dbState().subscribe((res) => {
+      console.log(res)
       if(res){
-        this.db.fetchShipsOwner().subscribe(item => {
-          this.shipList = item
-          console.log(this.shipList);   
+        this.db.getShipsOwner().then( async item => {
+          console.log( await item);   
         })
       }
     });
 
 
+  }
+
+  navigateToSapce(){
+    this.router.navigateByUrl('/games/space');
   }
 
 }
