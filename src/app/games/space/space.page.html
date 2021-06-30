@@ -70,12 +70,12 @@
       <ion-row>
         <ion-col class="carryOver" style="color: red;">
         <strong>- CP spent on upgrades</strong>
-        <ion-input  type="number" max={30} min={0} formControlName="carry" [(ngModel)]="carryValue" (ionChange)="updateCarry(carryValue)"></ion-input>
+        <ion-input  type="number" min={0} formControlName="update" [(ngModel)]="updateValue" (ionChange)="updateUpdate(updateValue)"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row style="text-align: center;background-color: lightgrey;"> 
         <ion-col>
-          <div ><strong style="text-align: center;">Remaining CP {{subTotal}}</strong></div>
+          <div ><strong style="text-align: center;">Remaining CP {{remaining}}</strong></div>
         </ion-col>
         <ion-col>
           <ion-button size="small" type="submit" color="secondary"><ion-icon name="save"></ion-icon>&nbsp;&nbsp;SAVE</ion-button>

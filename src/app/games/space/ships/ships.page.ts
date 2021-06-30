@@ -20,7 +20,7 @@ export class ShipsPage implements OnInit {
       if(res){
         this.db.fetchShipsOwner().subscribe(item => {
           this.shipList = item
-          
+          console.log(this.shipList);   
         })
       }
     });

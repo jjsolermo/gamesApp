@@ -27,6 +27,8 @@ export class SpacePage implements OnInit {
   pipeValue = 0;
   manteninanceValue = 0;
   turnOrderBidValue = 0;
+  updateValue = 0;
+  remaining = 0;
 
   constructor(private router: Router, private db: DbService,) { }
 
@@ -37,14 +39,14 @@ export class SpacePage implements OnInit {
         mineral: new FormControl(0),
         pipe: new FormControl(0),
         manteninance:new FormControl(0),
-        turnOrderBid:new FormControl(0)
+        turnOrderBid:new FormControl(0),
+        update :new FormControl(0)
       });
 
       this.db.dbState().subscribe((res) => {
         if(res){
           this.db.fetchTurn().subscribe(item => {
             this.turnList = item
-            console.log(item);
             if(this.turnList.length > 0){
               this.carryValue = this.turnList[0].CPS
             }else{
@@ -78,13 +80,34 @@ public updatePipe(e) :void{
 
 public updateManteninance(e) :void{
   this.subTotal = this.total - e - this.turnOrderBidValue
+  this.remaining = this.subTotal;
 }
 public updateTurnOrderBid(e) :void{
   this.subTotal = this.total - this.manteninanceValue - e
+  this.remaining = this.subTotal;
+}
+public updateUpdate(e) :void{
+  this.remaining = this.subTotal -  e
 }
 
+
 cpForm(){
-  console.log(this.ionicForm.value)
+  let turnForm = new Turn(); 
+    turnForm.CPS = this.remaining;
+
+  this.db.updateTurn(0, turnForm).then((data) => {
+    console.log(data);
+   this.total=  this.remaining;
+   this.subTotal= 0;
+   this.carryValue = 0;
+   this.colonyValue= 0;
+   this.mineralValue = 0;
+   this.pipeValue = 0;
+   this.manteninanceValue = 0;
+   this.turnOrderBidValue = 0;
+   this.updateValue = 0;
+   this.remaining = 0;
+  })
 }
 
 }

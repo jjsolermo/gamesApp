@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="ship of shipList">
-    <ion-item>
+  <ion-list>
+    <ion-item *ngFor="let ship of shipList; let i = index">
       <ion-label>
         <h2>{{ship.Type}}</h2>
-        <h3>I{ship.Class}</h3>
+        <h3>{{ship.Class}}</h3>
       </ion-label>
     </ion-item>
   </ion-list>
