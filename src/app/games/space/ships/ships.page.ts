@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Ship } from 'src/app/services/ship';
 import { DbService } from '../../../services/db.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
-import { FilterTiltShiftSharp } from '@material-ui/icons';
-
-
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../../../modal/modal/modal.page';
 
 @Component({
   selector: 'app-ships',
@@ -61,19 +60,45 @@ export class ShipsPage implements OnInit {
   id: 58
   }
 ]
-  constructor(private router: Router, private db: DbService) { }
+cps :any;
+data :any;
+
+  constructor(private router: Router,private rout:ActivatedRoute, private db: DbService , public modalController: ModalController) { }
 
   ngOnInit() {
-
-    this.db.dbState().subscribe((res) => {
-      console.log(res)
-      if(res){
-        this.ships = this.db.fetchShipsOwner();
-         console.log(this.ships);
-      }
+    this.data = this.rout.params.subscribe(params => {
+      this.cps = params['cps']; 
     });
 
+    this.db.dbState().subscribe((res) => {
+      if(res){
+        this.ships = this.db.fetchShipsOwner();
+      }
+    });
+  }
 
+  async presentModal(e) {
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      cssClass: 'modal',
+      componentProps: {
+        Attack_Strength: e.Attack_Strength,
+        Buy: e.Buy,
+        CP: e.CP,
+        Class: e.Class,
+        Defense_Strength: e.Defense_Strength,
+        Description: e.Description,
+        Hull_Size: e.Hull_Size,
+        Type: e.Type,
+        id: e.id,
+      }
+    });
+    return await modal.present();
+
+  }
+
+  buy(e){
+    this.cps = this.cps - e.CP
   }
 
   navigateToSapce(){

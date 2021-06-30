@@ -62,7 +62,10 @@ navigateToGames(){
   this.router.navigateByUrl('/games');
 }
 goToOwnerShips(){
-  this.router.navigateByUrl('/games/space/ships');
+  //this.router.navigateByUrl('/games/space/ships');
+}
+goToBuyShips(cps){
+  this.router.navigate(['/games/space/ships', cps]);
 }
 
 public updateCarry(e) :void{
