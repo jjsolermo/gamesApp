@@ -57,6 +57,14 @@ const routes = [
         path: 'games',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_games_games_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./games/games.module */ 88)).then(m => m.GamesPageModule)
     },
+    {
+        path: 'modal',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_modal_modal_modal_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./modal/modal/modal.module */ 32790)).then(m => m.ModalPageModule)
+    },
+    {
+        path: 'modal-ship',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_modal_modal-ship_modal-ship_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./modal/modal-ship/modal-ship.module */ 97760)).then(m => m.ModalShipPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -490,7 +498,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n");
 
 /***/ })
 

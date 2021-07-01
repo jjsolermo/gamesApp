@@ -712,6 +712,268 @@
     },
 
     /***/
+    69749:
+    /*!*****************************************************!*\
+      !*** ./src/app/modal/modal-ship/modal-ship.page.ts ***!
+      \*****************************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "ModalShipPage": function ModalShipPage() {
+          return (
+            /* binding */
+            _ModalShipPage
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! tslib */
+      64762);
+      /* harmony import */
+
+
+      var _raw_loader_modal_ship_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! !raw-loader!./modal-ship.page.html */
+      49283);
+      /* harmony import */
+
+
+      var _modal_ship_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./modal-ship.page.scss */
+      55759);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      37716);
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @ionic/angular */
+      80476);
+
+      var _ModalShipPage = /*#__PURE__*/function () {
+        function ModalShipPage(modalController) {
+          _classCallCheck(this, ModalShipPage);
+
+          this.modalController = modalController;
+        }
+
+        _createClass(ModalShipPage, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }, {
+          key: "close",
+          value: function close() {
+            this.modalController.dismiss();
+          }
+        }]);
+
+        return ModalShipPage;
+      }();
+
+      _ModalShipPage.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController
+        }];
+      };
+
+      _ModalShipPage.propDecorators = {
+        Attack_Strength: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Buy: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        CP: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Class: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Description: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Hull_Size: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Type: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        id: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TAttack: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TDefense: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TMove: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TOther: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TTactics: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }]
+      };
+      _ModalShipPage = (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-modal-ship',
+        template: _raw_loader_modal_ship_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_modal_ship_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
+      })], _ModalShipPage);
+      /***/
+    },
+
+    /***/
+    18891:
+    /*!*******************************************!*\
+      !*** ./src/app/modal/modal/modal.page.ts ***!
+      \*******************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export */
+
+
+      __webpack_require__.d(__webpack_exports__, {
+        /* harmony export */
+        "ModalPage": function ModalPage() {
+          return (
+            /* binding */
+            _ModalPage
+          );
+        }
+        /* harmony export */
+
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! tslib */
+      64762);
+      /* harmony import */
+
+
+      var _raw_loader_modal_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! !raw-loader!./modal.page.html */
+      29640);
+      /* harmony import */
+
+
+      var _modal_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! ./modal.page.scss */
+      33303);
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      37716);
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @ionic/angular */
+      80476);
+
+      var _ModalPage = /*#__PURE__*/function () {
+        function ModalPage(modalController) {
+          _classCallCheck(this, ModalPage);
+
+          this.modalController = modalController;
+        }
+
+        _createClass(ModalPage, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }, {
+          key: "close",
+          value: function close() {
+            this.modalController.dismiss();
+          }
+        }]);
+
+        return ModalPage;
+      }();
+
+      _ModalPage.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController
+        }];
+      };
+
+      _ModalPage.propDecorators = {
+        Attack_Strength: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Buy: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        CP: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Class: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Description: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Hull_Size: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        Type: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        id: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TAttack: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TDefense: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TMove: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TOther: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }],
+        TTactics: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input
+        }]
+      };
+      _ModalPage = (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-modal',
+        template: _raw_loader_modal_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_modal_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
+      })], _ModalPage);
+      /***/
+    },
+
+    /***/
     37556:
     /*!******************************************!*\
       !*** ./src/app/services/auth.service.ts ***!
@@ -917,6 +1179,78 @@
       _AuthService = (0, tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_7__.Injectable)({
         providedIn: 'root'
       })], _AuthService);
+      /***/
+    },
+
+    /***/
+    55759:
+    /*!*******************************************************!*\
+      !*** ./src/app/modal/modal-ship/modal-ship.page.scss ***!
+      \*******************************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = ".modal_css {\n  display: contents;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZGFsLXNoaXAucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQUE7QUFDSiIsImZpbGUiOiJtb2RhbC1zaGlwLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tb2RhbF9jc3N7XG4gICAgZGlzcGxheTogY29udGVudHM7XG59Il19 */";
+      /***/
+    },
+
+    /***/
+    33303:
+    /*!*********************************************!*\
+      !*** ./src/app/modal/modal/modal.page.scss ***!
+      \*********************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = ".modal_css {\n  display: contents;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZGFsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0oiLCJmaWxlIjoibW9kYWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1vZGFsX2Nzc3tcbiAgICBkaXNwbGF5OiBjb250ZW50cztcbn0iXX0= */";
+      /***/
+    },
+
+    /***/
+    49283:
+    /*!*********************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modal/modal-ship/modal-ship.page.html ***!
+      \*********************************************************************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Ship Details</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"close()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-card-header>\n      <ion-card-subtitle>Class</ion-card-subtitle>\n      <ion-card-title>{{Class}}</ion-card-title>\n    </ion-card-header> \n    <ion-card-content>\n      <ion-row>\n        <ion-col>\n          <h2>CP</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{CP}}</h3>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <h2>Type</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Type}}</h3>\n        </ion-col>\n        <ion-col>\n          <h2>Attack</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Attack_Strength}}</h3>\n        </ion-col>\n        <ion-col>\n          <h2>Defense</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Defense_Strength}}</h3>\n        </ion-col>\n        <ion-col>\n          <h2>Hull Size</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Hull_Size}}</h3>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-label style=\"margin-top: 1rem;color: black; font-weight: bold;\">\n          {{Description}}   \n        </ion-label>\n      </ion-row>      \n    </ion-card-content>\n    </ion-card>\n    <ion-card>\n      <ion-card-header>\n        <ion-card-title>Technologies</ion-card-title>\n      </ion-card-header> \n      <ion-card-content>\n        <ion-row>\n          <ion-col>\n            <h2>Attack </h2>\n            <h3 style=\"color: black; font-weight: bold;\">Level : {{TAttack}}</h3>\n          </ion-col>\n          <ion-col>\n            <h2>Defense </h2>\n            <h3 style=\"color: black; font-weight: bold;\">Level :{{TDefense}}</h3>\n          </ion-col>\n          <ion-col>\n            <h2>Tactical </h2>\n            <h3 style=\"color: black; font-weight: bold;\">Level :{{TTactics}}</h3>\n          </ion-col>\n        </ion-row>\n          <ion-row>\n          <ion-col>\n            <h2>Move </h2>\n            <h3 style=\"color: black; font-weight: bold;\">Level :{{TMove}}</h3>\n          </ion-col>\n          <ion-col>\n            <h2>Other </h2>\n            <h3 style=\"color: black; font-weight: bold;\">Level :{{TOther}}</h3>\n          </ion-col>\n        </ion-row>         \n      </ion-card-content>\n      </ion-card>\n</ion-content>\n\n";
+      /***/
+    },
+
+    /***/
+    29640:
+    /*!***********************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modal/modal/modal.page.html ***!
+      \***********************************************************************************/
+
+    /***/
+    function _(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Ship Details</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"close()\">Close</ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-card-header>\n      <ion-card-subtitle>Class</ion-card-subtitle>\n      <ion-card-title>{{Class}}</ion-card-title>\n    </ion-card-header> \n    <ion-card-content>\n      <ion-row>\n        <ion-col>\n          <h2>CP</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{CP}}</h3>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <h2>Type</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Type}}</h3>\n        </ion-col>\n        <ion-col>\n          <h2>Attack</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Attack_Strength}}</h3>\n        </ion-col>\n        <ion-col>\n          <h2>Defense</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Defense_Strength}}</h3>\n        </ion-col>\n        <ion-col>\n          <h2>Hull Size</h2>\n          <h3 style=\"color: black; font-weight: bold;\">{{Hull_Size}}</h3>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-label style=\"margin-top: 1rem;color: black; font-weight: bold;\">\n          {{Description}}   \n        </ion-label>\n      </ion-row>      \n    </ion-card-content>\n    </ion-card>\n</ion-content>\n";
       /***/
     }
   }]);

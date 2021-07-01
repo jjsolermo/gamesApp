@@ -95,9 +95,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 64762);
 /* harmony import */ var _raw_loader_ships_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./ships.page.html */ 90678);
 /* harmony import */ var _ships_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ships.page.scss */ 74493);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 37716);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 37716);
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/db.service */ 73773);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 39895);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 39895);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 80476);
+/* harmony import */ var src_app_modal_modal_ship_modal_ship_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/modal/modal-ship/modal-ship.page */ 69749);
+
+
 
 
 
@@ -105,18 +109,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ShipsPage = class ShipsPage {
-    constructor(router, db) {
+    constructor(router, db, modalController, toastController) {
         this.router = router;
         this.db = db;
+        this.modalController = modalController;
+        this.toastController = toastController;
         this.shipList = [];
     }
     ngOnInit() {
         this.db.dbState().subscribe((res) => {
-            console.log(res);
             if (res) {
                 this.ships = this.db.fetchShipsOwner();
+                this.db.getShipsOwner().then((data) => {
+                    console.log(data);
+                });
                 console.log(this.ships);
             }
+        });
+    }
+    destroyShip(ship) {
+        this.db.destroyShips(ship.id, 0).then((res) => {
+        });
+    }
+    presentModal(e) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: src_app_modal_modal_ship_modal_ship_page__WEBPACK_IMPORTED_MODULE_3__.ModalShipPage,
+                cssClass: 'modal',
+                componentProps: {
+                    Attack_Strength: e.Attack_Strength,
+                    Buy: e.Buy,
+                    CP: e.CP,
+                    Class: e.Class,
+                    Defense_Strength: e.Defense_Strength,
+                    Description: e.Description,
+                    Hull_Size: e.Hull_Size,
+                    TAttack: e.TAttack,
+                    TDefense: e.TDefense,
+                    TMove: e.TMove,
+                    TOther: e.TOther,
+                    TTactics: e.TTactics,
+                    Type: e.Type,
+                    id: e.id
+                }
+            });
+            return yield modal.present();
         });
     }
     navigateToSapce() {
@@ -124,11 +161,13 @@ let ShipsPage = class ShipsPage {
     }
 };
 ShipsPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router },
-    { type: _services_db_service__WEBPACK_IMPORTED_MODULE_2__.DbService }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
+    { type: _services_db_service__WEBPACK_IMPORTED_MODULE_2__.DbService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ToastController }
 ];
 ShipsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-ships',
         template: _raw_loader_ships_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
         styles: [_ships_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
@@ -147,7 +186,7 @@ ShipsPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNoaXBzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxrQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFDQTtFQUNJLCtCQUFBO0FBRUoiLCJmaWxlIjoic2hpcHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhlYWRlclNwYWNle1xyXG4gICAgZGlzcGxheTogY29udGVudHM7XHJcbn1cclxuXHJcbi5oZWFkZXJUaXRsZXtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIG1hcmdpbjogMnJlbTtcclxufVxyXG5pb24tbWVudS1idXR0b24ge1xyXG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n\n.caja {\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNoaXBzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxrQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFDQTtFQUNJLCtCQUFBO0FBRUo7O0FBQ0E7RUFDSSxrQkFBQTtBQUVKIiwiZmlsZSI6InNoaXBzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5oZWFkZXJTcGFjZXtcbiAgICBkaXNwbGF5OiBjb250ZW50cztcbn1cblxuLmhlYWRlclRpdGxle1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXJnaW46IDJyZW07XG59XG5pb24tbWVudS1idXR0b24ge1xuICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XG59XG5cbi5jYWphe1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn0iXX0= */");
 
 /***/ }),
 
@@ -159,7 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let ship of ships |async\">\r\n      <ion-label>\r\n        <h2>{{ship.Type}}</h2>\r\n        <h3>{{ship.Class}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Attack</h2>\r\n        <h3>{{ship.Attack_Strength}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Defense</h2>\r\n        <h3>{{ship.Defense_Strength}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <h2>Hull Size</h2>\r\n        <h3>{{ship.Hull_Size}}</h3>\r\n      </ion-label>\r\n      <ion-label>\r\n        <ion-button class=\"headerSpace\" color=\"danger\"> <ion-icon name=\"trash\"></ion-icon>&nbsp;&nbsp; Destroy</ion-button>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar >  \n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let ship of ships |async\">\n      <!--<ion-item *ngFor=\"let ship of shipFake\">  -->\n          <ion-label>\n            <h2>{{ship.Type}}</h2>\n            <h3>{{ship.Class}}</h3>\n          </ion-label>\n          <ion-label>\n            <h2>Attack</h2>\n            <h3>{{ship.Attack_Strength}}</h3>\n          </ion-label>\n          <ion-label>\n            <h2>Defense</h2>\n            <h3>{{ship.Defense_Strength}}</h3>\n          </ion-label>\n            <ion-label style=\"margin: 3%;\">\n              <ion-button  class=\"headerSpace\" color=\"primary\" (click)=\"presentModal(ship)\"><ion-icon name=\"eye\"></ion-icon></ion-button>\n          </ion-label>  \n          <ion-label style=\"margin: 3%;\">\n            <ion-button class=\"headerSpace\" color=\"danger\" (click)=\"destroyShip(ship)\"><ion-icon name=\"trash\"></ion-icon></ion-button>\n        </ion-label>                       \n    </ion-item>\n  </ion-list>\n\n</ion-content>\n");
 
 /***/ })
 

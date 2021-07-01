@@ -9,7 +9,7 @@
   <section class="menuButton">
     <ion-button style="width: 4rem;" size="small">CP'S</ion-button>
     <ion-button style="width: 4rem;" size="small" color="secondary" (click)="goToOwnerShips()">SHIPS</ion-button>
-    <ion-button style="width: 4rem;" size="small" color="success">TECHS</ion-button>
+    <ion-button style="width: 4rem;" size="small" color="success" (click)="goToOwnerTechs()">TECHS</ion-button>
     <ion-button style="width: 4rem;" size="small" color="warning">RESET</ion-button>
   </section>
 
@@ -18,24 +18,23 @@
       <ion-row>
         <ion-col class="carryOver">
         <strong>Carry Over (max 30)</strong>
-        <ion-input  type="number" max={30} min={0} formControlName="carry" [(ngModel)]="carryValue" (ionChange)="updateCarry(carryValue)"></ion-input>
- 
+        <ion-input (ionFocus)="this.carryValue = ''" type="number" max={30} min={0} formControlName="carry" [(ngModel)]="carryValue" (ionChange)="updateCarry(carryValue)"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row class="carryOver">
         <ion-col>
           <strong>+ Colony CPs</strong>
-          <ion-input style="text-align: center;" type="number" min={0} formControlName="colony" [(ngModel)]="colonyValue" (ionChange)="updateColony(colonyValue)"></ion-input>
+          <ion-input (ionFocus)="this.colonyValue = ''" style="text-align: center;" type="number" min={0} formControlName="colony" [(ngModel)]="colonyValue" (ionChange)="updateColony(colonyValue)"></ion-input>
           
         </ion-col>
         <ion-col>
           <strong>+ Mineral CPs</strong>
-      <ion-input style="text-align: center;" type="number" min={0} formControlName="mineral" [(ngModel)]="mineralValue" (ionChange)="updateMineral(mineralValue)"></ion-input>
+      <ion-input (ionFocus)="this.mineralValue = ''" style="text-align: center;" type="number" min={0} formControlName="mineral" [(ngModel)]="mineralValue" (ionChange)="updateMineral(mineralValue)"></ion-input>
       
         </ion-col>
         <ion-col>
           <strong>+ MS Pipe CPs</strong>
-      <ion-input style="text-align: center;" type="number" min={0} formControlName="pipe" [(ngModel)]="pipeValue" (ionChange)="updatePipe(pipeValue)"></ion-input>
+      <ion-input (ionFocus)="this.pipeValue = ''" style="text-align: center;" type="number" min={0} formControlName="pipe" [(ngModel)]="pipeValue" (ionChange)="updatePipe(pipeValue)"></ion-input>
    
         </ion-col>
       </ion-row>
@@ -47,11 +46,11 @@
       <ion-row class="carryOver">
         <ion-col>
           <strong style="color: red;">- Manteninance</strong>
-          <ion-input  style="text-align: center;color: red;" type="number" min={0} formControlName="manteninance" [(ngModel)]="manteninanceValue" (ionChange)="updateManteninance(manteninanceValue)"></ion-input>       
+          <ion-input (ionFocus)="this.manteninanceValue = ''"  style="text-align: center;color: red;" type="number" min={0} formControlName="manteninance" [(ngModel)]="manteninanceValue" (ionChange)="updateManteninance(manteninanceValue)"></ion-input>       
         </ion-col>
         <ion-col>
           <strong style="color: red;">- Turn order bid</strong>
-          <ion-input style="text-align: center;color: red;" type="number" min={0} formControlName="turnOrderBid" [(ngModel)]="turnOrderBidValue" (ionChange)="updateTurnOrderBid(turnOrderBidValue)"></ion-input>     
+          <ion-input (ionFocus)="this.turnOrderBidValue = ''" style="text-align: center;color: red;" type="number" min={0} formControlName="turnOrderBid" [(ngModel)]="turnOrderBidValue" (ionChange)="updateTurnOrderBid(turnOrderBidValue)"></ion-input>     
         </ion-col>
       </ion-row>
       <ion-row>
@@ -64,13 +63,13 @@
           <ion-button size="small" (click)="goToBuyShips(subTotal)"><ion-icon name="airplane"></ion-icon>&nbsp;&nbsp;Buy Ships</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button size="small"><ion-icon name="construct"></ion-icon>&nbsp;&nbsp;Buy Techs</ion-button>
+          <ion-button size="small" (click)="goToBuyTech(subTotal)"><ion-icon name="construct"></ion-icon>&nbsp;&nbsp;Buy Techs</ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col class="carryOver" style="color: red;">
         <strong>- CP spent on upgrades</strong>
-        <ion-input  type="number" min={0} formControlName="update" [(ngModel)]="updateValue" (ionChange)="updateUpdate(updateValue)"></ion-input>
+        <ion-input  (ionFocus)="this.updateValue = ''" type="number" min={0} formControlName="update" [(ngModel)]="updateValue" (ionChange)="updateUpdate(updateValue)"></ion-input>
         </ion-col>
       </ion-row>
       <ion-row style="text-align: center;background-color: lightgrey;"> 

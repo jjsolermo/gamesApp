@@ -9,7 +9,7 @@ const routes: Routes = [
     component: SpacePage
   },
   {
-    path: 'ships/:cps',
+    path: 'ships',
     loadChildren: () => import('./ships/ships.module').then( m => m.ShipsPageModule)
   },
   {
@@ -17,11 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./techs/techs.module').then( m => m.TechsPageModule)
   },
   {
-    path: 'buy-ships',
+    path: 'buy-ships/:cps',
     loadChildren: () => import('./buy-ships/buy-ships.module').then( m => m.BuyShipsPageModule)
   },
   {
-    path: 'buy-tech',
+    path: 'buy-tech/:cps',
     loadChildren: () => import('./buy-tech/buy-tech.module').then( m => m.BuyTechPageModule)
   }
 

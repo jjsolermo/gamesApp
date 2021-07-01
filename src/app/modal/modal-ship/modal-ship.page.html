@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ship Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Class</ion-card-subtitle>
+      <ion-card-title>{{Class}}</ion-card-title>
+    </ion-card-header> 
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <h2>CP</h2>
+          <h3 style="color: black; font-weight: bold;">{{CP}}</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h2>Type</h2>
+          <h3 style="color: black; font-weight: bold;">{{Type}}</h3>
+        </ion-col>
+        <ion-col>
+          <h2>Attack</h2>
+          <h3 style="color: black; font-weight: bold;">{{Attack_Strength}}</h3>
+        </ion-col>
+        <ion-col>
+          <h2>Defense</h2>
+          <h3 style="color: black; font-weight: bold;">{{Defense_Strength}}</h3>
+        </ion-col>
+        <ion-col>
+          <h2>Hull Size</h2>
+          <h3 style="color: black; font-weight: bold;">{{Hull_Size}}</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-label style="margin-top: 1rem;color: black; font-weight: bold;">
+          {{Description}}   
+        </ion-label>
+      </ion-row>      
+    </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Technologies</ion-card-title>
+      </ion-card-header> 
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <h2>Attack </h2>
+            <h3 style="color: black; font-weight: bold;">Level : {{TAttack}}</h3>
+          </ion-col>
+          <ion-col>
+            <h2>Defense </h2>
+            <h3 style="color: black; font-weight: bold;">Level :{{TDefense}}</h3>
+          </ion-col>
+          <ion-col>
+            <h2>Tactical </h2>
+            <h3 style="color: black; font-weight: bold;">Level :{{TTactics}}</h3>
+          </ion-col>
+        </ion-row>
+          <ion-row>
+          <ion-col>
+            <h2>Move </h2>
+            <h3 style="color: black; font-weight: bold;">Level :{{TMove}}</h3>
+          </ion-col>
+          <ion-col>
+            <h2>Other </h2>
+            <h3 style="color: black; font-weight: bold;">Level :{{TOther}}</h3>
+          </ion-col>
+        </ion-row>         
+      </ion-card-content>
+      </ion-card>
+</ion-content>
+

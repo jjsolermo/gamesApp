@@ -11,11 +11,17 @@ export class ModalPage implements OnInit {
   @Input() Attack_Strength:string;
   @Input() Buy: boolean;
   @Input() CP: number;
-  @Input() Class: string;
+  @Input() Class: number;
   @Input() Description: string;
   @Input() Hull_Size: number;
   @Input() Type:string;
   @Input() id: number;
+  @Input() TAttack: number;
+  @Input() TDefense: number;
+  @Input() TMove: number;
+  @Input() TOther: number;
+  @Input() TTactics: number;
+
 
   constructor(public modalController: ModalController) { }
 

@@ -3,8 +3,8 @@ import { Ship } from 'src/app/services/ship';
 import { DbService } from '../../../services/db.service';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
-import { ModalController } from '@ionic/angular';
-import { ModalPage } from '../../../modal/modal/modal.page';
+import { ModalController,ToastController  } from '@ionic/angular';
+import { ModalShipPage } from 'src/app/modal/modal-ship/modal-ship.page';
 
 @Component({
   selector: 'app-ships',
@@ -14,72 +14,31 @@ import { ModalPage } from '../../../modal/modal/modal.page';
 export class ShipsPage implements OnInit {
 
   shipList : Ship[]= [];
-  ships:Observable<any[]>;
-  shipFake:any[] =[
-  {
-    Attack_Strength: "E3 (A6-8)",
-  Buy: 1,
-  CP: 6,
-  Class: "Scout",
-  Defense_Strength: "0",
-  Description: "May have increased firepower versus fighters depending on level of point defense technology - A6 at PD1, A7 at PD2, A8 at PD3.",
-  Hull_Size: 1,
-  Type: "SC #1",
-  id: 1
-  },
-  {
-    Attack_Strength: "E3 (A6-8)",
-  Buy: 1,
-  CP: 6,
-  Class: "Scout",
-  Defense_Strength: "0",
-  Description: "May have increased firepower versus fighters depending on level of point defense technology - A6 at PD1, A7 at PD2, A8 at PD3.",
-  Hull_Size: 1,
-  Type: "SC #2",
-  id: 2
-  },
-  {Attack_Strength: "E3 (A6-8)",
-  Buy: 1,
-  CP: 6,
-  Class: "Scout",
-  Defense_Strength: "0",
-  Description: "May have increased firepower versus fighters depending on level of point defense technology - A6 at PD1, A7 at PD2, A8 at PD3.",
-  Hull_Size: 1,
-  Type: "SC #3",
-  id: 3
-  },
-  {
-    Attack_Strength: "0",
-  Buy: 1,
-  CP: 5,
-  Class: "Mining Ship",
-  Defense_Strength: "0",
-  Description: "(0 - Mant) Can pick up minerals and Space Wrecks.Always has a movement tech of 1.Is destroyed instantly during movement or combat if there are enemycombat ships present and there are no friendly combat ships.Can not retreat.",
-  Hull_Size: 1,
-  Type: "Miner 1",
-  id: 58
-  }
-]
-cps :any;
-data :any;
+  ships:Observable<Ship[]>;
 
-  constructor(private router: Router,private rout:ActivatedRoute, private db: DbService , public modalController: ModalController) { }
+  constructor(private router: Router, private db: DbService , public modalController: ModalController,public toastController: ToastController) { }
 
   ngOnInit() {
-    this.data = this.rout.params.subscribe(params => {
-      this.cps = params['cps']; 
-    });
-
     this.db.dbState().subscribe((res) => {
       if(res){
-        this.ships = this.db.fetchShipsOwner();
+        this.ships = this.db.fetchShipsOwner();   
+        this.db.getShipsOwner().then((data) => {
+          console.log(data);
+        }) 
+        console.log(this.ships);
       }
     });
+
+  }
+
+  destroyShip(ship:Ship){
+    this.db.destroyShips(ship.id,0).then((res) => {
+    })
   }
 
   async presentModal(e) {
     const modal = await this.modalController.create({
-      component: ModalPage,
+      component: ModalShipPage,
       cssClass: 'modal',
       componentProps: {
         Attack_Strength: e.Attack_Strength,
@@ -89,18 +48,18 @@ data :any;
         Defense_Strength: e.Defense_Strength,
         Description: e.Description,
         Hull_Size: e.Hull_Size,
+        TAttack: e.TAttack,
+        TDefense: e.TDefense,
+        TMove: e.TMove,
+        TOther: e.TOther,
+        TTactics: e.TTactics,
         Type: e.Type,
-        id: e.id,
+        id: e.id
       }
     });
     return await modal.present();
 
   }
-
-  buy(e){
-    this.cps = this.cps - e.CP
-  }
-
   navigateToSapce(){
     this.router.navigateByUrl('/games/space');
   }

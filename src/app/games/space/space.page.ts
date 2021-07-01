@@ -62,10 +62,22 @@ navigateToGames(){
   this.router.navigateByUrl('/games');
 }
 goToOwnerShips(){
-  //this.router.navigateByUrl('/games/space/ships');
+  this.router.navigateByUrl('/games/space/ships');
+}
+goToOwnerTechs(){
+  this.router.navigateByUrl('/games/space/techs');
 }
 goToBuyShips(cps){
-  this.router.navigate(['/games/space/ships', cps]);
+  this.router.navigate(['/games/space/buy-ships', cps]);
+}
+goToBuyTechsubTotal(cps){
+  this.router.navigate(['/games/space/buy-tech', cps]);
+}
+clear(e){
+  console.log('hola')
+  if(e === 0){
+    return '';
+  }
 }
 
 public updateCarry(e) :void{

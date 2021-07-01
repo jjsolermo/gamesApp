@@ -8,6 +8,11 @@ CREATE TABLE IF NOT EXISTS  "ships" (
 	"Hull_Size"	INTEGER,
 	"Description"	TEXT,
     "Buy" BOOLEAN DEFAULT 0,
+	"TAttack" INTEGER DEFAULT 0,
+	"TDefense" INTEGER DEFAULT 0,
+	"TTactics" INTEGER DEFAULT 0,
+	"TMove" INTEGER DEFAULT 1,
+	"TOther" TEXT,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 );
 INSERT or IGNORE INTO ships (Type, Class, CP, Attack_Strength, Defense_Strength, Hull_Size, Description,Buy) VALUES ('SC #1', 'Scout', 6, 'E3 (A6-8)', '0', 1, 'May have increased firepower versus fighters depending on level of point defense technology - A6 at PD1, A7 at PD2, A8 at PD3.',1);
@@ -94,16 +99,16 @@ INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Ships Si
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Ships Size', 4, 20, 'Can build BC');
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Ships Size', 5, 20, 'Can build BB');
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Ships Size', 6, 20, 'Can build DN');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description,Buy) VALUES ('Attack', 0, 0, 'Add 0 to a ship''s attack rating when in battle',1);
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Attack', 1, 20, 'Add 1 to a ship''s attack rating when in battle');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Attack', 2, 30, 'Add 2 to a ship''s attack rating when in battle (up to the ship''s limit)');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Attack', 3, 25, 'Add 3 to a ship''s attack rating when in battle (up to the ship''s limit)');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description,Buy) VALUES ('Attack', 0, 0, 'Add 0 to a ships attack rating when in battle',1);
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Attack', 1, 20, 'Add 1 to a ships attack rating when in battle');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Attack', 2, 30, 'Add 2 to a ships attack rating when in battle (up to the ship''s limit)');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Attack', 3, 25, 'Add 3 to a ships attack rating when in battle (up to the ship''s limit)');
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description,Buy) VALUES ( 'Ships Size', 1, 0, 'Can build SC,CO,SY,Miner,Decoy,MS Pipeline',1);
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 0, 0, 'Add 0 to a ship''s defense rating when in battle');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 1, 20, 'Add 1 to a ship''s defense rating when in battle');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 2, 30, 'Add 2 to a ship''s defense rating when in battle (up to the ship''s limit)');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 3, 25, 'Add 3 to a ship''s defense rating when in battle (up to the ship''s limit)');
-INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Tactics', 0, 0, 'When opposin ships both have the same fire rating (E,C,D,etc..), the side with the higher tactical rating fires firts, If the tactical is also tied,the defender fire first.This rating is not limit by the tecnology limit(hull size) of a ship!');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description,Buy) VALUES ( 'Defense', 0, 0, 'Add 0 to a ships defense rating when in battle',1);
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 1, 20, 'Add 1 to a ships defense rating when in battle');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 2, 30, 'Add 2 to a ships defense rating when in battle (up to the ship''s limit)');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Defense', 3, 25, 'Add 3 to a ships defense rating when in battle (up to the ship''s limit)');
+INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description,Buy) VALUES ( 'Tactics', 0, 0, 'When opposin ships both have the same fire rating (E,C,D,etc..), the side with the higher tactical rating fires firts, If the tactical is also tied,the defender fire first.This rating is not limit by the tecnology limit(hull size) of a ship!',1);
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Tactics', 1, 15, 'When opposin ships both have the same fire rating (E,C,D,etc..), the side with the higher tactical rating fires firts, If the tactical is also tied,the defender fire first.This rating is not limit by the tecnology limit(hull size) of a ship!');
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Tactics', 2, 15, 'When opposin ships both have the same fire rating (E,C,D,etc..), the side with the higher tactical rating fires firts, If the tactical is also tied,the defender fire first.This rating is not limit by the tecnology limit(hull size) of a ship!');
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ( 'Tactics', 3, 15, 'When opposin ships both have the same fire rating (E,C,D,etc..), the side with the higher tactical rating fires firts, If the tactical is also tied,the defender fire first.This rating is not limit by the tecnology limit(hull size) of a ship!');

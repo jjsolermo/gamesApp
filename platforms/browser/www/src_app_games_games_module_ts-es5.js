@@ -296,7 +296,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "#logout {\n  float: right;\n}\n\n#titleGame {\n  position: absolute;\n  margin: 0.5em;\n}\n\n.buttonSet {\n  margin-top: 6rem;\n  text-align: center;\n  display: grid;\n  justify-content: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdhbWVzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQUE7QUFDSjs7QUFDQTtFQUNJLGtCQUFBO0VBQ0EsYUFBQTtBQUVKOztBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGFBQUE7RUFDQSx1QkFBQTtBQUdKIiwiZmlsZSI6ImdhbWVzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNsb2dvdXR7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbn1cclxuI3RpdGxlR2FtZXtcclxuICAgIHBvc2l0aW9uOmFic29sdXRlO1xyXG4gICAgbWFyZ2luOiAwLjVlbTtcclxufVxyXG4uYnV0dG9uU2V0e1xyXG4gICAgbWFyZ2luLXRvcDogNnJlbTtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIGRpc3BsYXk6IGdyaWQ7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxufSJdfQ== */";
+      __webpack_exports__["default"] = "#logout {\n  float: right;\n}\n\n#titleGame {\n  position: absolute;\n  margin: 0.5em;\n}\n\n.buttonSet {\n  margin-top: 6rem;\n  text-align: center;\n  display: grid;\n  justify-content: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdhbWVzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQUE7QUFDSjs7QUFDQTtFQUNJLGtCQUFBO0VBQ0EsYUFBQTtBQUVKOztBQUFBO0VBQ0ksZ0JBQUE7RUFDQSxrQkFBQTtFQUNBLGFBQUE7RUFDQSx1QkFBQTtBQUdKIiwiZmlsZSI6ImdhbWVzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNsb2dvdXR7XG4gICAgZmxvYXQ6IHJpZ2h0O1xufVxuI3RpdGxlR2FtZXtcbiAgICBwb3NpdGlvbjphYnNvbHV0ZTtcbiAgICBtYXJnaW46IDAuNWVtO1xufVxuLmJ1dHRvblNldHtcbiAgICBtYXJnaW4tdG9wOiA2cmVtO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufSJdfQ== */";
       /***/
     },
 
@@ -314,7 +314,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title id=\"titleGame\">Games</ion-title>\r\n    <ion-button id=\"logout\" fill=\"clear\" (click)=\"logOut()\">LogOut</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"buttonSet\">\r\n      <ion-button color=\"primary\" (click)=\"navigateToSpace()\">Space Empire 4X</ion-button>\r\n      <br>\r\n      <ion-button color=\"primary\" (click)=\"navigateToDDice()\">D-Dice</ion-button>\r\n  </div>\r\n</ion-content>\r\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-title id=\"titleGame\">Games</ion-title>\n    <ion-button id=\"logout\" fill=\"clear\" (click)=\"logOut()\">LogOut</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"buttonSet\">\n      <ion-button color=\"primary\" (click)=\"navigateToSpace()\">Space Empire 4X</ion-button>\n      <br>\n      <ion-button color=\"primary\" (click)=\"navigateToDDice()\">D-Dice</ion-button>\n  </div>\n</ion-content>\n";
       /***/
     }
   }]);

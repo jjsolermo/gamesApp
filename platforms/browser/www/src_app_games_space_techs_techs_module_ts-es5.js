@@ -179,7 +179,7 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! tslib */
       64762);
       /* harmony import */
@@ -197,28 +197,60 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/core */
       37716);
+      /* harmony import */
+
+
+      var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ../../../services/db.service */
+      73773);
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/router */
+      39895);
 
       var _TechsPage = /*#__PURE__*/function () {
-        function TechsPage() {
+        function TechsPage(db, router) {
           _classCallCheck(this, TechsPage);
+
+          this.db = db;
+          this.router = router;
         }
 
         _createClass(TechsPage, [{
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            var _this = this;
+
+            this.db.dbState().subscribe(function (res) {
+              if (res) {
+                _this.techs = _this.db.fetchTechOwner();
+              }
+            });
+          }
+        }, {
+          key: "navigateToSapce",
+          value: function navigateToSapce() {
+            this.router.navigateByUrl('/games/space');
+          }
         }]);
 
         return TechsPage;
       }();
 
       _TechsPage.ctorParameters = function () {
-        return [];
+        return [{
+          type: _services_db_service__WEBPACK_IMPORTED_MODULE_2__.DbService
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_3__.Router
+        }];
       };
 
-      _TechsPage = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+      _TechsPage = (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-techs',
         template: _raw_loader_techs_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_techs_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
@@ -240,7 +272,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ0ZWNocy5wYWdlLnNjc3MifQ== */";
+      __webpack_exports__["default"] = ".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n\n.caja {\n  text-align: center;\n}\n\n.tarjeta {\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlY2hzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxrQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFDQTtFQUNJLCtCQUFBO0FBRUo7O0FBQ0E7RUFDSSxrQkFBQTtBQUVKOztBQUFBO0VBQ0ksV0FBQTtBQUdKIiwiZmlsZSI6InRlY2hzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5oZWFkZXJTcGFjZXtcbiAgICBkaXNwbGF5OiBjb250ZW50cztcbn1cblxuLmhlYWRlclRpdGxle1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXJnaW46IDJyZW07XG59XG5pb24tbWVudS1idXR0b24ge1xuICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSk7XG59XG5cbi5jYWphe1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbi50YXJqZXRhe1xuICAgIHdpZHRoOiAxMDAlO1xuXG59Il19 */";
       /***/
     },
 
@@ -258,7 +290,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>techs</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-title style=\"text-align: center;\">Technologies</ion-title>\n  <ion-list>\n    <ion-item *ngFor=\"let tech of techs |async\">\n      <ion-card class=\"tarjeta\">\n        <ion-card-header>\n          <ion-card-subtitle>Name</ion-card-subtitle>\n          <ion-card-title>{{tech.Name}}</ion-card-title>\n        </ion-card-header> \n        <ion-card-content>\n          <ion-row>\n            <ion-col>\n              <h2>Level</h2>\n              <h3 style=\"color: black; font-weight: bold;\">{{tech.Value}}</h3>\n            </ion-col>\n            <ion-col>\n              <h2>Cost</h2>\n              <h3 style=\"color: black; font-weight: bold;\">{{tech.Cost}}</h3>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-label style=\"white-space: break-spaces;color: black; font-weight: bold;\">\n              {{tech.Description}}   \n            </ion-label>\n          </ion-row>      \n        </ion-card-content>\n        </ion-card>\n    </ion-item>\n  </ion-list>\n</ion-content>\n";
       /***/
     }
   }]);
