@@ -440,6 +440,62 @@ const openURL = async (url, ev, direction, animation) => {
 
 /***/ }),
 
+/***/ 18891:
+/*!*******************************************!*\
+  !*** ./src/app/modal/modal/modal.page.ts ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalPage": function() { return /* binding */ ModalPage; }
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 64762);
+/* harmony import */ var _raw_loader_modal_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !raw-loader!./modal.page.html */ 29640);
+/* harmony import */ var _modal_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal.page.scss */ 33303);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 37716);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ 80476);
+
+
+
+
+
+let ModalPage = class ModalPage {
+    constructor(modalController) {
+        this.modalController = modalController;
+    }
+    ngOnInit() {
+    }
+    close() {
+        this.modalController.dismiss();
+    }
+};
+ModalPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__.ModalController }
+];
+ModalPage.propDecorators = {
+    Attack_Strength: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    Buy: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    CP: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    Class: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    Description: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    Hull_Size: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    Type: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }],
+    id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__.Input }]
+};
+ModalPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
+        selector: 'app-modal',
+        template: _raw_loader_modal_page_html__WEBPACK_IMPORTED_MODULE_0__.default,
+        styles: [_modal_page_scss__WEBPACK_IMPORTED_MODULE_1__.default]
+    })
+], ModalPage);
+
+
+
+/***/ }),
+
 /***/ 37556:
 /*!******************************************!*\
   !*** ./src/app/services/auth.service.ts ***!
@@ -553,6 +609,30 @@ AuthService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
 ], AuthService);
 
 
+
+/***/ }),
+
+/***/ 33303:
+/*!*********************************************!*\
+  !*** ./src/app/modal/modal/modal.page.scss ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".modal_css {\n  display: contents;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1vZGFsLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0oiLCJmaWxlIjoibW9kYWwucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1vZGFsX2Nzc3tcclxuICAgIGRpc3BsYXk6IGNvbnRlbnRzO1xyXG59Il19 */");
+
+/***/ }),
+
+/***/ 29640:
+/*!***********************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modal/modal/modal.page.html ***!
+  \***********************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>Ship Details</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"close()\">Close</ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-subtitle>Class</ion-card-subtitle>\r\n      <ion-card-title>{{Class}}</ion-card-title>\r\n    </ion-card-header> \r\n    <ion-card-content>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h2>CP</h2>\r\n          <h3 style=\"color: black; font-weight: bold;\">{{CP}}</h3>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <h2>Type</h2>\r\n          <h3 style=\"color: black; font-weight: bold;\">{{Type}}</h3>\r\n        </ion-col>\r\n        <ion-col>\r\n          <h2>Attack</h2>\r\n          <h3 style=\"color: black; font-weight: bold;\">{{Attack_Strength}}</h3>\r\n        </ion-col>\r\n        <ion-col>\r\n          <h2>Defense</h2>\r\n          <h3 style=\"color: black; font-weight: bold;\">{{Defense_Strength}}</h3>\r\n        </ion-col>\r\n        <ion-col>\r\n          <h2>Hull Size</h2>\r\n          <h3 style=\"color: black; font-weight: bold;\">{{Hull_Size}}</h3>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-label style=\"margin-top: 1rem;color: black; font-weight: bold;\">\r\n          {{Description}}   \r\n        </ion-label>\r\n      </ion-row>      \r\n    </ion-card-content>\r\n    </ion-card>\r\n</ion-content>\r\n");
 
 /***/ })
 

@@ -25,12 +25,20 @@ const routes = [
         component: _space_page__WEBPACK_IMPORTED_MODULE_0__.SpacePage
     },
     {
-        path: 'ships',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_games_space_ships_ships_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./ships/ships.module */ 1084)).then(m => m.ShipsPageModule)
+        path: 'ships/:cps',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_games_space_ships_ships_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./ships/ships.module */ 1084)).then(m => m.ShipsPageModule)
     },
     {
         path: 'techs',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_games_space_techs_techs_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./techs/techs.module */ 31970)).then(m => m.TechsPageModule)
+    },
+    {
+        path: 'buy-ships',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_games_space_buy-ships_buy-ships_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./buy-ships/buy-ships.module */ 14941)).then(m => m.BuyShipsPageModule)
+    },
+    {
+        path: 'buy-tech',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_games_space_buy-tech_buy-tech_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./buy-tech/buy-tech.module */ 89471)).then(m => m.BuyTechPageModule)
     }
 ];
 let SpacePageRoutingModule = class SpacePageRoutingModule {
@@ -162,7 +170,10 @@ let SpacePage = class SpacePage {
         this.router.navigateByUrl('/games');
     }
     goToOwnerShips() {
-        this.router.navigateByUrl('/games/space/ships');
+        //this.router.navigateByUrl('/games/space/ships');
+    }
+    goToBuyShips(cps) {
+        this.router.navigate(['/games/space/ships', cps]);
     }
     updateCarry(e) {
         this.total = e + this.colonyValue + this.mineralValue + this.pipeValue;
@@ -254,6 +265,8 @@ let DbService = class DbService {
         this.shipList = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject([]);
         this.turnList = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject([]);
         this.shipListOwner = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject([]);
+        this.techList = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject([]);
+        this.techOwnerList = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject([]);
         this.isDbReady = new rxjs__WEBPACK_IMPORTED_MODULE_2__.BehaviorSubject(false);
         this.platform.ready().then(() => {
             this.sqlite.create({
@@ -278,6 +291,12 @@ let DbService = class DbService {
     fetchTurn() {
         return this.turnList.asObservable();
     }
+    fetchTech() {
+        return this.techList.asObservable();
+    }
+    fetchTechOwner() {
+        return this.techOwnerList.asObservable();
+    }
     // Render fake data
     getFakeData() {
         this.httpClient.get('assets/seed.sql', { responseType: 'text' }).subscribe(data => {
@@ -286,6 +305,8 @@ let DbService = class DbService {
                 this.getShips();
                 this.getTurn();
                 this.getShipsOwner();
+                this.getTechOwner();
+                this.getTech();
                 this.isDbReady.next(true);
             })
                 .catch(error => console.error(error));
@@ -307,10 +328,51 @@ let DbService = class DbService {
                         Hull_Size: res.rows.item(i).Hull_Size,
                         Description: res.rows.item(i).Description,
                         Buy: res.rows.item(i).Buy,
+                        TAttack: res.rows.item(i).TAttack,
+                        TDefense: res.rows.item(i).TDefense,
+                        TTactics: res.rows.item(i).TTactics,
+                        TMove: res.rows.item(i).TMove,
+                        TOther: res.rows.item(i).TOther,
                     });
                 }
             }
             this.shipList.next(items);
+        });
+    }
+    getTechOwner() {
+        return this.storage.executeSql('SELECT * FROM techs where Buy = 1', []).then(res => {
+            let items = [];
+            if (res.rows.length > 0) {
+                for (var i = 0; i < res.rows.length; i++) {
+                    items.push({
+                        Id: res.rows.item(i).Id,
+                        Name: res.rows.item(i).Name,
+                        Value: res.rows.item(i).Value,
+                        Cost: res.rows.item(i).Cost,
+                        Description: res.rows.item(i).Description,
+                        Buy: res.rows.item(i).Buy,
+                    });
+                }
+            }
+            this.techOwnerList.next(items);
+        });
+    }
+    getTech() {
+        return this.storage.executeSql('SELECT * FROM techs where Buy = 1', []).then(res => {
+            let items = [];
+            if (res.rows.length > 0) {
+                for (var i = 0; i < res.rows.length; i++) {
+                    items.push({
+                        Id: res.rows.item(i).Id,
+                        Name: res.rows.item(i).Name,
+                        Value: res.rows.item(i).Value,
+                        Cost: res.rows.item(i).Cost,
+                        Description: res.rows.item(i).Description,
+                        Buy: res.rows.item(i).Buy,
+                    });
+                }
+            }
+            this.techList.next(items);
         });
     }
     getShipsOwner() {
@@ -328,10 +390,28 @@ let DbService = class DbService {
                         Hull_Size: res.rows.item(i).Hull_Size,
                         Description: res.rows.item(i).Description,
                         Buy: res.rows.item(i).Buy,
+                        TAttack: res.rows.item(i).TAttack,
+                        TDefense: res.rows.item(i).TDefense,
+                        TTactics: res.rows.item(i).TTactics,
+                        TMove: res.rows.item(i).TMove,
+                        TOther: res.rows.item(i).TOther,
                     });
                 }
             }
             this.shipListOwner.next(items);
+        });
+    }
+    buyShip(id, buy) {
+        return this.storage.executeSql(`UPDATE ships SET Buy = ? WHERE id = ${id}`, buy)
+            .then(data => {
+            this.getShips();
+        });
+    }
+    updateShips(id, shipObject) {
+        let data = [shipObject.TAttack, shipObject.TDefense, shipObject.TTactics, shipObject.TMove, shipObject.TOther];
+        return this.storage.executeSql(`UPDATE ship SET TAttack = ? ,TDefense = ? ,TTactics = ? ,TMove = ? , TOther = ?  WHERE id = ${id}`, data)
+            .then(data => {
+            this.getShipsOwner();
         });
     }
     updateTurn(id, turnObject) {
@@ -444,7 +524,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToGames()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-title class=\"headerTitle\">Space Empire 4X</ion-title>\r\n  <section class=\"menuButton\">\r\n    <ion-button style=\"width: 4rem;\" size=\"small\">CP'S</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"secondary\" (click)=\"goToOwnerShips()\">SHIPS</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"success\">TECHS</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"warning\">RESET</ion-button>\r\n  </section>\r\n\r\n  <form  [formGroup]=\"ionicForm\" (ngSubmit)=\"cpForm()\" novalidate>\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col class=\"carryOver\">\r\n        <strong>Carry Over (max 30)</strong>\r\n        <ion-input  type=\"number\" max={30} min={0} formControlName=\"carry\" [(ngModel)]=\"carryValue\" (ionChange)=\"updateCarry(carryValue)\"></ion-input>\r\n \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <strong>+ Colony CPs</strong>\r\n          <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"colony\" [(ngModel)]=\"colonyValue\" (ionChange)=\"updateColony(colonyValue)\"></ion-input>\r\n          \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong>+ Mineral CPs</strong>\r\n      <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"mineral\" [(ngModel)]=\"mineralValue\" (ionChange)=\"updateMineral(mineralValue)\"></ion-input>\r\n      \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong>+ MS Pipe CPs</strong>\r\n      <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"pipe\" [(ngModel)]=\"pipeValue\" (ionChange)=\"updatePipe(pipeValue)\"></ion-input>\r\n   \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">Total {{total}}</strong></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <strong style=\"color: red;\">- Manteninance</strong>\r\n          <ion-input  style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"manteninance\" [(ngModel)]=\"manteninanceValue\" (ionChange)=\"updateManteninance(manteninanceValue)\"></ion-input>       \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong style=\"color: red;\">- Turn order bid</strong>\r\n          <ion-input style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"turnOrderBid\" [(ngModel)]=\"turnOrderBidValue\" (ionChange)=\"updateTurnOrderBid(turnOrderBidValue)\"></ion-input>     \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">SubTotal {{subTotal}}</strong></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <ion-button size=\"small\"><ion-icon name=\"airplane\"></ion-icon>&nbsp;&nbsp;Buy Ships</ion-button>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-button size=\"small\"><ion-icon name=\"construct\"></ion-icon>&nbsp;&nbsp;Buy Techs</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"carryOver\" style=\"color: red;\">\r\n        <strong>- CP spent on upgrades</strong>\r\n        <ion-input  type=\"number\" min={0} formControlName=\"update\" [(ngModel)]=\"updateValue\" (ionChange)=\"updateUpdate(updateValue)\"></ion-input>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row style=\"text-align: center;background-color: lightgrey;\"> \r\n        <ion-col>\r\n          <div ><strong style=\"text-align: center;\">Remaining CP {{remaining}}</strong></div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-button size=\"small\" type=\"submit\" color=\"secondary\"><ion-icon name=\"save\"></ion-icon>&nbsp;&nbsp;SAVE</ion-button>\r\n         </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </form>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToGames()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-title class=\"headerTitle\">Space Empire 4X</ion-title>\r\n  <section class=\"menuButton\">\r\n    <ion-button style=\"width: 4rem;\" size=\"small\">CP'S</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"secondary\" (click)=\"goToOwnerShips()\">SHIPS</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"success\">TECHS</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"warning\">RESET</ion-button>\r\n  </section>\r\n\r\n  <form  [formGroup]=\"ionicForm\" (ngSubmit)=\"cpForm()\" novalidate>\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col class=\"carryOver\">\r\n        <strong>Carry Over (max 30)</strong>\r\n        <ion-input  type=\"number\" max={30} min={0} formControlName=\"carry\" [(ngModel)]=\"carryValue\" (ionChange)=\"updateCarry(carryValue)\"></ion-input>\r\n \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <strong>+ Colony CPs</strong>\r\n          <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"colony\" [(ngModel)]=\"colonyValue\" (ionChange)=\"updateColony(colonyValue)\"></ion-input>\r\n          \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong>+ Mineral CPs</strong>\r\n      <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"mineral\" [(ngModel)]=\"mineralValue\" (ionChange)=\"updateMineral(mineralValue)\"></ion-input>\r\n      \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong>+ MS Pipe CPs</strong>\r\n      <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"pipe\" [(ngModel)]=\"pipeValue\" (ionChange)=\"updatePipe(pipeValue)\"></ion-input>\r\n   \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">Total {{total}}</strong></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <strong style=\"color: red;\">- Manteninance</strong>\r\n          <ion-input  style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"manteninance\" [(ngModel)]=\"manteninanceValue\" (ionChange)=\"updateManteninance(manteninanceValue)\"></ion-input>       \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong style=\"color: red;\">- Turn order bid</strong>\r\n          <ion-input style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"turnOrderBid\" [(ngModel)]=\"turnOrderBidValue\" (ionChange)=\"updateTurnOrderBid(turnOrderBidValue)\"></ion-input>     \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">SubTotal {{subTotal}}</strong></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <ion-button size=\"small\" (click)=\"goToBuyShips(subTotal)\"><ion-icon name=\"airplane\"></ion-icon>&nbsp;&nbsp;Buy Ships</ion-button>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-button size=\"small\"><ion-icon name=\"construct\"></ion-icon>&nbsp;&nbsp;Buy Techs</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"carryOver\" style=\"color: red;\">\r\n        <strong>- CP spent on upgrades</strong>\r\n        <ion-input  type=\"number\" min={0} formControlName=\"update\" [(ngModel)]=\"updateValue\" (ionChange)=\"updateUpdate(updateValue)\"></ion-input>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row style=\"text-align: center;background-color: lightgrey;\"> \r\n        <ion-col>\r\n          <div ><strong style=\"text-align: center;\">Remaining CP {{remaining}}</strong></div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-button size=\"small\" type=\"submit\" color=\"secondary\"><ion-icon name=\"save\"></ion-icon>&nbsp;&nbsp;SAVE</ion-button>\r\n         </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </form>\r\n</ion-content>\r\n");
 
 /***/ })
 

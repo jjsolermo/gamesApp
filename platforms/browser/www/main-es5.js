@@ -111,6 +111,17 @@
             return m.GamesPageModule;
           });
         }
+      }, {
+        path: 'modal',
+        loadChildren: function loadChildren() {
+          return Promise.all(
+          /*! import() */
+          [__webpack_require__.e("common"), __webpack_require__.e("src_app_modal_modal_modal_module_ts")]).then(__webpack_require__.bind(__webpack_require__,
+          /*! ./modal/modal/modal.module */
+          32790)).then(function (m) {
+            return m.ModalPageModule;
+          });
+        }
       }];
 
       var _AppRoutingModule = function AppRoutingModule() {

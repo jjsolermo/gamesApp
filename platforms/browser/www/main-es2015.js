@@ -57,6 +57,10 @@ const routes = [
         path: 'games',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_games_games_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./games/games.module */ 88)).then(m => m.GamesPageModule)
     },
+    {
+        path: 'modal',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_modal_modal_modal_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./modal/modal/modal.module */ 32790)).then(m => m.ModalPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

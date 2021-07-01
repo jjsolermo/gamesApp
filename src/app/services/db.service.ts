@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Ship } from './ship';
 import { Turn } from './turn';
+import { Tech } from './tech';
+
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
@@ -16,6 +18,9 @@ export class DbService {
   shipList = new BehaviorSubject([]);
   turnList = new BehaviorSubject([]);
   shipListOwner = new BehaviorSubject([]);
+  techList = new BehaviorSubject([]);
+  techOwnerList = new BehaviorSubject([]);
+
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
@@ -51,6 +56,12 @@ export class DbService {
   fetchTurn(): Observable<Turn[]> {
     return this.turnList.asObservable();
   }
+  fetchTech(): Observable<Tech[]> {
+    return this.techList.asObservable();
+  }
+  fetchTechOwner(): Observable<Tech[]> {
+    return this.techOwnerList.asObservable();
+  }
 
     // Render fake data
     getFakeData() {
@@ -64,6 +75,8 @@ export class DbService {
             this.getShips();
             this.getTurn();
             this.getShipsOwner();
+            this.getTechOwner();
+            this.getTech();
             this.isDbReady.next(true);
           })
           .catch(error => console.error(error));
@@ -86,10 +99,54 @@ export class DbService {
             Hull_Size: res.rows.item(i).Hull_Size,
             Description: res.rows.item(i).Description,
             Buy: res.rows.item(i).Buy,
+            TAttack:res.rows.item(i).TAttack,
+	          TDefense:res.rows.item(i).TDefense,
+	          TTactics:res.rows.item(i).TTactics,
+	          TMove:res.rows.item(i).TMove,
+	          TOther: res.rows.item(i).TOther,
            });
         }
       }
       this.shipList.next(items);
+    });
+    
+  }
+
+  getTechOwner(){
+    return this.storage.executeSql('SELECT * FROM techs where Buy = 1', []).then(res => {
+      let items: Tech[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            Id: res.rows.item(i).Id,
+          	Name:res.rows.item(i).Name,
+          	Value:res.rows.item(i).Value,
+          	Cost:res.rows.item(i).Cost,
+          	Description:res.rows.item(i).Description,
+            Buy:res.rows.item(i).Buy,
+           });
+        }
+      }
+      this.techOwnerList.next(items);
+    });
+    
+  }
+  getTech(){
+    return this.storage.executeSql('SELECT * FROM techs where Buy = 1', []).then(res => {
+      let items: Tech[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            Id: res.rows.item(i).Id,
+          	Name:res.rows.item(i).Name,
+          	Value:res.rows.item(i).Value,
+          	Cost:res.rows.item(i).Cost,
+          	Description:res.rows.item(i).Description,
+            Buy:res.rows.item(i).Buy,
+           });
+        }
+      }
+      this.techList.next(items);
     });
     
   }
@@ -109,12 +166,32 @@ export class DbService {
             Hull_Size: res.rows.item(i).Hull_Size,
             Description: res.rows.item(i).Description,
             Buy: res.rows.item(i).Buy,
+            TAttack:res.rows.item(i).TAttack,
+	          TDefense:res.rows.item(i).TDefense,
+	          TTactics:res.rows.item(i).TTactics,
+	          TMove:res.rows.item(i).TMove,
+	          TOther: res.rows.item(i).TOther,
            });
         }
       }
       this.shipListOwner.next(items);
     });
     
+  }
+
+  buyShip(id, buy){
+    return this.storage.executeSql(`UPDATE ships SET Buy = ? WHERE id = ${id}`, buy)
+    .then(data => {
+      this.getShips();
+    })
+  }
+
+  updateShips(id, shipObject: Ship) {
+    let data = [shipObject.TAttack,shipObject.TDefense,shipObject.TTactics,shipObject.TMove,shipObject.TOther];
+    return this.storage.executeSql(`UPDATE ship SET TAttack = ? ,TDefense = ? ,TTactics = ? ,TMove = ? , TOther = ?  WHERE id = ${id}`, data)
+    .then(data => {
+      this.getShipsOwner();
+    })
   }
 
   updateTurn(id, turnObject: Turn) {

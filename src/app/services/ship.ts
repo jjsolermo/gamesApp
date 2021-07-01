@@ -8,4 +8,9 @@ export class Ship {
 	Hull_Size: number;
 	Description: string;
     Buy: boolean;
+	TAttack:number;
+	TDefense:number;
+	TTactics:number;
+	TMove:number;
+	TOther: string;
 }

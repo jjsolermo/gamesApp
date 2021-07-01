@@ -8,6 +8,11 @@ CREATE TABLE IF NOT EXISTS  "ships" (
 	"Hull_Size"	INTEGER,
 	"Description"	TEXT,
     "Buy" BOOLEAN DEFAULT 0,
+	"TAttack" INTEGER DEFAULT 0,
+	"TDefense" INTEGER DEFAULT 0,
+	"TTactics" INTEGER DEFAULT 0,
+	"TMove" INTEGER DEFAULT 1,
+	"TOther" TEXT,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 );
 INSERT or IGNORE INTO ships (Type, Class, CP, Attack_Strength, Defense_Strength, Hull_Size, Description,Buy) VALUES ('SC #1', 'Scout', 6, 'E3 (A6-8)', '0', 1, 'May have increased firepower versus fighters depending on level of point defense technology - A6 at PD1, A7 at PD2, A8 at PD3.',1);
