@@ -1,9 +1,58 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>ddice</ion-title>
+    <ion-button class="headerSpace" color="primary" (click)="navigateToGames()"> <ion-icon name="arrow-back"></ion-icon>&nbsp;&nbsp; Back</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="soldierImg">
+    <ion-thumbnail>
+      <img src="../../../assets/icon/soldier.png">
+    </ion-thumbnail>
+  </div>
+  <div class="soldiers">
+    <ion-button  color="danger" (click)="resSoldier(soldierValue)">-</ion-button>
+    <ion-input disabled="true" type="number" [(ngModel)]="soldierValue"></ion-input>
+    <ion-button  color="success" (click)="sumSoldier(soldierValue)">+</ion-button>
+  </div>
+
+  <div class="medalImg">
+    <ion-thumbnail>
+      <img src="../../../assets/icon/medal.png">
+    </ion-thumbnail>
+  </div>
+  <div class="medal">
+    <ion-button  color="danger" (click)="resMedal(medalValue)">-</ion-button>
+    <ion-input disabled="true" type="number" [(ngModel)]="medalValue"></ion-input>
+    <ion-button  color="success" (click)="sumMedal(medalValue)">+</ion-button>
+  </div>
+
+  <div class="workImg">
+    <ion-thumbnail>
+      <img src="../../../assets/icon/work.png">
+    </ion-thumbnail>
+  </div>
+  <div class="work">
+    <ion-button  color="danger" (click)="resWork(workValue)">-</ion-button>
+    <ion-input disabled="true" type="number" [(ngModel)]="workValue"></ion-input>
+    <ion-button  color="success" (click)="sumWork(workValue)">+</ion-button>
+  </div>
+
+  <div class="starImg">
+    <ion-thumbnail>
+      <img src="../../../assets/icon/star.png">
+    </ion-thumbnail>
+  </div>
+  <div class="star">
+    <ion-button  color="danger" (click)="resStar(starValue)">-</ion-button>
+    <ion-input disabled="true" type="number" [(ngModel)]="starValue"></ion-input>
+    <ion-button  color="success" (click)="sumStar(starValue)">+</ion-button>
+  </div>
+
+  <div>
+    <ion-button  style="margin-top: 1rem;
+    justify-content: center;
+    display: flex;" color="primary" (click)="reset()">RESET</ion-button>
+  </div>
 
 </ion-content>

@@ -24,7 +24,7 @@ export class GamesPage implements OnInit {
   }
 
   navigateToDDice(){
-    console.log('soy un boton 2');
+    this.router.navigateByUrl('/games/ddice');
   }
 
 }
