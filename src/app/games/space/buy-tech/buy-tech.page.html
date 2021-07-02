@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>buyTech</ion-title>
+    <ion-button class="headerSpace" color="primary" (click)="navigateToSapce()"> <ion-icon name="arrow-back"></ion-icon>&nbsp;&nbsp; Back</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-title style="text-align: center;margin-top: 1rem;">Technologies  ,cps available {{cps}}
+</ion-title>
+  <ion-list>
+    <ion-item *ngFor="let tech of techs |async"><!---->
+      <ion-card class="tarjeta">
+        <ion-card-header>
+          <ion-card-subtitle>Name</ion-card-subtitle>
+          <ion-card-title>{{tech.Name}}</ion-card-title>
+        </ion-card-header> 
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <h2>Level</h2>
+              <h3 style="color: black; font-weight: bold;">{{tech.Value}}</h3>
+            </ion-col>
+            <ion-col>
+              <h2>Cost</h2>
+              <h3 style="color: black; font-weight: bold;">{{tech.Cost}}</h3>
+            </ion-col>
+            <ion-col>
+              <ion-button class="headerSpace" color="success" (click)="buyTech(tech)"><ion-icon name="cash"></ion-icon></ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-label style="white-space: break-spaces;color: black; font-weight: bold;">
+              {{tech.Description}}   
+            </ion-label>
+          </ion-row>      
+        </ion-card-content>
+        </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -83,35 +83,7 @@ export class DbService {
       });
     }
 
-  // Get list
-  getShips(){
-    return this.storage.executeSql('SELECT * FROM ships where Buy = 0', []).then(res => {
-      let items: Ship[] = [];
-      if (res.rows.length > 0) {
-        for (var i = 0; i < res.rows.length; i++) { 
-          items.push({ 
-            id: res.rows.item(i).Id,
-            Type: res.rows.item(i).Type,
-            Class: res.rows.item(i).Class,
-            CP:res.rows.item(i).CP,
-            Attack_Strength: res.rows.item(i).Attack_Strength,
-            Defense_Strength: res.rows.item(i).Defense_Strength,
-            Hull_Size: res.rows.item(i).Hull_Size,
-            Description: res.rows.item(i).Description,
-            Buy: res.rows.item(i).Buy,
-            TAttack:res.rows.item(i).TAttack,
-	          TDefense:res.rows.item(i).TDefense,
-	          TTactics:res.rows.item(i).TTactics,
-	          TMove:res.rows.item(i).TMove,
-	          TOther: res.rows.item(i).TOther,
-           });
-        }
-      }
-      this.shipList.next(items);
-    });
-    
-  }
-
+ 
   getTechOwner(){
     return this.storage.executeSql('SELECT * FROM techs where Buy = 1', []).then(res => {
       let items: Tech[] = [];
@@ -151,6 +123,45 @@ export class DbService {
     
   }
 
+  buyTech(id, buy){
+    let data = [buy];
+    return this.storage.executeSql(`UPDATE techs SET Buy = ? WHERE Id = ${id}`, data)
+    .then(data => {
+      this.getTech();
+      this.getTechOwner();
+    })
+  }
+
+   // Get list
+   getShips(){
+    return this.storage.executeSql('SELECT * FROM ships where Buy = 0', []).then(res => {
+      let items: Ship[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) { 
+          items.push({ 
+            id: res.rows.item(i).Id,
+            Type: res.rows.item(i).Type,
+            Class: res.rows.item(i).Class,
+            CP:res.rows.item(i).CP,
+            Attack_Strength: res.rows.item(i).Attack_Strength,
+            Defense_Strength: res.rows.item(i).Defense_Strength,
+            Hull_Size: res.rows.item(i).Hull_Size,
+            Description: res.rows.item(i).Description,
+            Buy: res.rows.item(i).Buy,
+            TAttack:res.rows.item(i).TAttack,
+	          TDefense:res.rows.item(i).TDefense,
+	          TTactics:res.rows.item(i).TTactics,
+	          TMove:res.rows.item(i).TMove,
+	          TOther: res.rows.item(i).TOther,
+           });
+        }
+      }
+      this.shipList.next(items);
+    });
+    
+  }
+
+
   getShipsOwner(){
     return this.storage.executeSql('SELECT * FROM ships where Buy = 1', []).then(res => {
       let items: Ship[] = [];
@@ -186,14 +197,14 @@ export class DbService {
     })
   }
 
+
+
   updateShips(id, shipObject: Ship) {
     let data = [shipObject.TAttack,shipObject.TDefense,shipObject.TTactics,shipObject.TMove,shipObject.TOther];
     return this.storage.executeSql(`UPDATE ships SET TAttack = ? ,TDefense = ? ,TTactics = ? ,TMove = ? , TOther = ?  WHERE id = ${id}`, data)
     .then(data => {
       this.getShips();
       this.getShipsOwner();
-      console.log(this.shipList);
-      console.log(this.shipListOwner);
     })
   }
 

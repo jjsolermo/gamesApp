@@ -178,7 +178,7 @@ let SpacePage = class SpacePage {
     goToBuyShips(cps) {
         this.router.navigate(['/games/space/buy-ships', cps]);
     }
-    goToBuyTechsubTotal(cps) {
+    goToBuyTech(cps) {
         this.router.navigate(['/games/space/buy-tech', cps]);
     }
     updateCarry(e) {
@@ -318,33 +318,6 @@ let DbService = class DbService {
                 .catch(error => console.error(error));
         });
     }
-    // Get list
-    getShips() {
-        return this.storage.executeSql('SELECT * FROM ships where Buy = 0', []).then(res => {
-            let items = [];
-            if (res.rows.length > 0) {
-                for (var i = 0; i < res.rows.length; i++) {
-                    items.push({
-                        id: res.rows.item(i).Id,
-                        Type: res.rows.item(i).Type,
-                        Class: res.rows.item(i).Class,
-                        CP: res.rows.item(i).CP,
-                        Attack_Strength: res.rows.item(i).Attack_Strength,
-                        Defense_Strength: res.rows.item(i).Defense_Strength,
-                        Hull_Size: res.rows.item(i).Hull_Size,
-                        Description: res.rows.item(i).Description,
-                        Buy: res.rows.item(i).Buy,
-                        TAttack: res.rows.item(i).TAttack,
-                        TDefense: res.rows.item(i).TDefense,
-                        TTactics: res.rows.item(i).TTactics,
-                        TMove: res.rows.item(i).TMove,
-                        TOther: res.rows.item(i).TOther,
-                    });
-                }
-            }
-            this.shipList.next(items);
-        });
-    }
     getTechOwner() {
         return this.storage.executeSql('SELECT * FROM techs where Buy = 1', []).then(res => {
             let items = [];
@@ -379,6 +352,41 @@ let DbService = class DbService {
                 }
             }
             this.techList.next(items);
+        });
+    }
+    buyTech(id, buy) {
+        let data = [buy];
+        return this.storage.executeSql(`UPDATE techs SET Buy = ? WHERE Id = ${id}`, data)
+            .then(data => {
+            this.getTech();
+            this.getTechOwner();
+        });
+    }
+    // Get list
+    getShips() {
+        return this.storage.executeSql('SELECT * FROM ships where Buy = 0', []).then(res => {
+            let items = [];
+            if (res.rows.length > 0) {
+                for (var i = 0; i < res.rows.length; i++) {
+                    items.push({
+                        id: res.rows.item(i).Id,
+                        Type: res.rows.item(i).Type,
+                        Class: res.rows.item(i).Class,
+                        CP: res.rows.item(i).CP,
+                        Attack_Strength: res.rows.item(i).Attack_Strength,
+                        Defense_Strength: res.rows.item(i).Defense_Strength,
+                        Hull_Size: res.rows.item(i).Hull_Size,
+                        Description: res.rows.item(i).Description,
+                        Buy: res.rows.item(i).Buy,
+                        TAttack: res.rows.item(i).TAttack,
+                        TDefense: res.rows.item(i).TDefense,
+                        TTactics: res.rows.item(i).TTactics,
+                        TMove: res.rows.item(i).TMove,
+                        TOther: res.rows.item(i).TOther,
+                    });
+                }
+            }
+            this.shipList.next(items);
         });
     }
     getShipsOwner() {
@@ -419,8 +427,6 @@ let DbService = class DbService {
             .then(data => {
             this.getShips();
             this.getShipsOwner();
-            console.log(this.shipList);
-            console.log(this.shipListOwner);
         });
     }
     destroyShips(id, buy) {
@@ -529,7 +535,7 @@ class Turn {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n\n.menuButton {\n  display: flex;\n  justify-content: center;\n}\n\n.inputCp {\n  text-align: center;\n  position: absolute;\n  left: 26%;\n}\n\n.carryOver {\n  margin-top: 1rem;\n  text-align: center;\n  padding: 0;\n}\n\n.carry {\n  margin-top: 2em;\n}\n\n.colony {\n  margin-top: 7em;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n}\n\n.mineral {\n  margin-top: 12em;\n}\n\n.pipe {\n  margin-top: 17em;\n}\n\n.manteninance {\n  margin-top: 25em;\n  color: red;\n}\n\n.turnOrderBid {\n  margin-top: 29em;\n  color: red;\n}\n\n.total {\n  position: absolute;\n  margin-top: 22em;\n  background: gainsboro;\n  text-align: center;\n  width: 100%;\n}\n\n.formClass {\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNwYWNlLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxrQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFDQTtFQUNJLCtCQUFBO0FBRUo7O0FBQ0U7RUFDRSxhQUFBO0VBQ0EsdUJBQUE7QUFFSjs7QUFFRTtFQUNFLGtCQUFBO0VBQ0Esa0JBQUE7RUFDQSxTQUFBO0FBQ0o7O0FBRUU7RUFDRSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsVUFBQTtBQUNKOztBQUVFO0VBQ0UsZUFBQTtBQUNKOztBQUVFO0VBQ0UsZUFBQTtFQUNBLGtCQUFBO0VBQ0EsYUFBQTtFQUNBLHVCQUFBO0FBQ0o7O0FBQ0U7RUFDRSxnQkFBQTtBQUVKOztBQUFFO0VBQ0UsZ0JBQUE7QUFHSjs7QUFERTtFQUNFLGdCQUFBO0VBQ0EsVUFBQTtBQUlKOztBQUZFO0VBQ0UsZ0JBQUE7RUFDQSxVQUFBO0FBS0o7O0FBSEU7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EscUJBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7QUFNSjs7QUFKRTtFQUNFLFNBQUE7QUFPSiIsImZpbGUiOiJzcGFjZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaGVhZGVyU3BhY2V7XG4gICAgZGlzcGxheTogY29udGVudHM7XG59XG5cbi5oZWFkZXJUaXRsZXtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbWFyZ2luOiAycmVtO1xufVxuaW9uLW1lbnUtYnV0dG9uIHtcbiAgICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xuICB9XG5cbiAgLm1lbnVCdXR0b257XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgfVxuXG5cbiAgLmlucHV0Q3Age1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgbGVmdDogMjYlO1xuICB9XG5cbiAgLmNhcnJ5T3ZlcntcbiAgICBtYXJnaW4tdG9wOiAxcmVtO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBwYWRkaW5nOiAwO1xuICB9XG5cbiAgLmNhcnJ5e1xuICAgIG1hcmdpbi10b3A6IDJlbTtcbiAgfVxuXG4gIC5jb2xvbnl7XG4gICAgbWFyZ2luLXRvcDogN2VtO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICB9XG4gIC5taW5lcmFse1xuICAgIG1hcmdpbi10b3A6IDEyZW07XG4gIH1cbiAgLnBpcGV7XG4gICAgbWFyZ2luLXRvcDogMTdlbTtcbiAgfVxuICAubWFudGVuaW5hbmNle1xuICAgIG1hcmdpbi10b3A6IDI1ZW07XG4gICAgY29sb3I6IHJlZDtcbiAgfVxuICAudHVybk9yZGVyQmlke1xuICAgIG1hcmdpbi10b3A6IDI5ZW07XG4gICAgY29sb3I6IHJlZDtcbiAgfVxuICAudG90YWx7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIG1hcmdpbi10b3A6IDIyZW07XG4gICAgYmFja2dyb3VuZDogZ2FpbnNib3JvO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuICAuZm9ybUNsYXNze1xuICAgIG1hcmdpbjogMDtcbiAgfSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n\n.menuButton {\n  display: flex;\n  justify-content: center;\n}\n\n.inputCp {\n  text-align: center;\n  position: absolute;\n  left: 26%;\n}\n\n.carryOver {\n  margin-top: 1rem;\n  text-align: center;\n  padding: 0;\n}\n\n.carry {\n  margin-top: 2em;\n}\n\n.colony {\n  margin-top: 7em;\n  text-align: center;\n  display: flex;\n  justify-content: center;\n}\n\n.mineral {\n  margin-top: 12em;\n}\n\n.pipe {\n  margin-top: 17em;\n}\n\n.manteninance {\n  margin-top: 25em;\n  color: red;\n}\n\n.turnOrderBid {\n  margin-top: 29em;\n  color: red;\n}\n\n.total {\n  position: absolute;\n  margin-top: 22em;\n  background: gainsboro;\n  text-align: center;\n  width: 100%;\n}\n\n.formClass {\n  margin: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNwYWNlLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxrQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFDQTtFQUNJLCtCQUFBO0FBRUo7O0FBQ0U7RUFDRSxhQUFBO0VBQ0EsdUJBQUE7QUFFSjs7QUFFRTtFQUNFLGtCQUFBO0VBQ0Esa0JBQUE7RUFDQSxTQUFBO0FBQ0o7O0FBRUU7RUFDRSxnQkFBQTtFQUNBLGtCQUFBO0VBQ0EsVUFBQTtBQUNKOztBQUVFO0VBQ0UsZUFBQTtBQUNKOztBQUVFO0VBQ0UsZUFBQTtFQUNBLGtCQUFBO0VBQ0EsYUFBQTtFQUNBLHVCQUFBO0FBQ0o7O0FBQ0U7RUFDRSxnQkFBQTtBQUVKOztBQUFFO0VBQ0UsZ0JBQUE7QUFHSjs7QUFERTtFQUNFLGdCQUFBO0VBQ0EsVUFBQTtBQUlKOztBQUZFO0VBQ0UsZ0JBQUE7RUFDQSxVQUFBO0FBS0o7O0FBSEU7RUFDRSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0EscUJBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7QUFNSjs7QUFKRTtFQUNFLFNBQUE7QUFPSiIsImZpbGUiOiJzcGFjZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaGVhZGVyU3BhY2V7XHJcbiAgICBkaXNwbGF5OiBjb250ZW50cztcclxufVxyXG5cclxuLmhlYWRlclRpdGxle1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgbWFyZ2luOiAycmVtO1xyXG59XHJcbmlvbi1tZW51LWJ1dHRvbiB7XHJcbiAgICBjb2xvcjogdmFyKC0taW9uLWNvbG9yLXByaW1hcnkpO1xyXG4gIH1cclxuXHJcbiAgLm1lbnVCdXR0b257XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgfVxyXG5cclxuXHJcbiAgLmlucHV0Q3Age1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgbGVmdDogMjYlO1xyXG4gIH1cclxuXHJcbiAgLmNhcnJ5T3ZlcntcclxuICAgIG1hcmdpbi10b3A6IDFyZW07XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBwYWRkaW5nOiAwO1xyXG4gIH1cclxuXHJcbiAgLmNhcnJ5e1xyXG4gICAgbWFyZ2luLXRvcDogMmVtO1xyXG4gIH1cclxuXHJcbiAgLmNvbG9ueXtcclxuICAgIG1hcmdpbi10b3A6IDdlbTtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICB9XHJcbiAgLm1pbmVyYWx7XHJcbiAgICBtYXJnaW4tdG9wOiAxMmVtO1xyXG4gIH1cclxuICAucGlwZXtcclxuICAgIG1hcmdpbi10b3A6IDE3ZW07XHJcbiAgfVxyXG4gIC5tYW50ZW5pbmFuY2V7XHJcbiAgICBtYXJnaW4tdG9wOiAyNWVtO1xyXG4gICAgY29sb3I6IHJlZDtcclxuICB9XHJcbiAgLnR1cm5PcmRlckJpZHtcclxuICAgIG1hcmdpbi10b3A6IDI5ZW07XHJcbiAgICBjb2xvcjogcmVkO1xyXG4gIH1cclxuICAudG90YWx7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBtYXJnaW4tdG9wOiAyMmVtO1xyXG4gICAgYmFja2dyb3VuZDogZ2FpbnNib3JvO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgfVxyXG4gIC5mb3JtQ2xhc3N7XHJcbiAgICBtYXJnaW46IDA7XHJcbiAgfSJdfQ== */");
 
 /***/ }),
 
@@ -541,7 +547,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar >  \n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToGames()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-title class=\"headerTitle\">Space Empire 4X</ion-title>\n  <section class=\"menuButton\">\n    <ion-button style=\"width: 4rem;\" size=\"small\">CP'S</ion-button>\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"secondary\" (click)=\"goToOwnerShips()\">SHIPS</ion-button>\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"success\" (click)=\"goToOwnerTechs()\">TECHS</ion-button>\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"warning\">RESET</ion-button>\n  </section>\n\n  <form  [formGroup]=\"ionicForm\" (ngSubmit)=\"cpForm()\" novalidate>\n    <ion-grid>\n      <ion-row>\n        <ion-col class=\"carryOver\">\n        <strong>Carry Over (max 30)</strong>\n        <ion-input  type=\"number\" max={30} min={0} formControlName=\"carry\" [(ngModel)]=\"carryValue\" (ionChange)=\"updateCarry(carryValue)\"></ion-input>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"carryOver\">\n        <ion-col>\n          <strong>+ Colony CPs</strong>\n          <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"colony\" [(ngModel)]=\"colonyValue\" (ionChange)=\"updateColony(colonyValue)\"></ion-input>\n          \n        </ion-col>\n        <ion-col>\n          <strong>+ Mineral CPs</strong>\n      <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"mineral\" [(ngModel)]=\"mineralValue\" (ionChange)=\"updateMineral(mineralValue)\"></ion-input>\n      \n        </ion-col>\n        <ion-col>\n          <strong>+ MS Pipe CPs</strong>\n      <ion-input style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"pipe\" [(ngModel)]=\"pipeValue\" (ionChange)=\"updatePipe(pipeValue)\"></ion-input>\n   \n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">Total {{total}}</strong></div>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"carryOver\">\n        <ion-col>\n          <strong style=\"color: red;\">- Manteninance</strong>\n          <ion-input  style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"manteninance\" [(ngModel)]=\"manteninanceValue\" (ionChange)=\"updateManteninance(manteninanceValue)\"></ion-input>       \n        </ion-col>\n        <ion-col>\n          <strong style=\"color: red;\">- Turn order bid</strong>\n          <ion-input style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"turnOrderBid\" [(ngModel)]=\"turnOrderBidValue\" (ionChange)=\"updateTurnOrderBid(turnOrderBidValue)\"></ion-input>     \n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col>\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">SubTotal {{subTotal}}</strong></div>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"carryOver\">\n        <ion-col>\n          <ion-button size=\"small\" (click)=\"goToBuyShips(subTotal)\"><ion-icon name=\"airplane\"></ion-icon>&nbsp;&nbsp;Buy Ships</ion-button>\n        </ion-col>\n        <ion-col>\n          <ion-button size=\"small\" (click)=\"goToBuyTech(subTotal)\"><ion-icon name=\"construct\"></ion-icon>&nbsp;&nbsp;Buy Techs</ion-button>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col class=\"carryOver\" style=\"color: red;\">\n        <strong>- CP spent on upgrades</strong>\n        <ion-input  type=\"number\" min={0} formControlName=\"update\" [(ngModel)]=\"updateValue\" (ionChange)=\"updateUpdate(updateValue)\"></ion-input>\n        </ion-col>\n      </ion-row>\n      <ion-row style=\"text-align: center;background-color: lightgrey;\"> \n        <ion-col>\n          <div ><strong style=\"text-align: center;\">Remaining CP {{remaining}}</strong></div>\n        </ion-col>\n        <ion-col>\n          <ion-button size=\"small\" type=\"submit\" color=\"secondary\"><ion-icon name=\"save\"></ion-icon>&nbsp;&nbsp;SAVE</ion-button>\n         </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToGames()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-title class=\"headerTitle\">Space Empire 4X</ion-title>\r\n  <section class=\"menuButton\">\r\n    <ion-button style=\"width: 4rem;\" size=\"small\">CP'S</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"secondary\" (click)=\"goToOwnerShips()\">SHIPS</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"success\" (click)=\"goToOwnerTechs()\">TECHS</ion-button>\r\n    <ion-button style=\"width: 4rem;\" size=\"small\" color=\"warning\">RESET</ion-button>\r\n  </section>\r\n\r\n  <form  [formGroup]=\"ionicForm\" (ngSubmit)=\"cpForm()\" novalidate>\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col class=\"carryOver\">\r\n        <strong>Carry Over (max 30)</strong>\r\n        <ion-input (ionFocus)=\"this.carryValue = ''\" type=\"number\" max={30} min={0} formControlName=\"carry\" [(ngModel)]=\"carryValue\" (ionChange)=\"updateCarry(carryValue)\"></ion-input>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <strong>+ Colony CPs</strong>\r\n          <ion-input (ionFocus)=\"this.colonyValue = ''\" style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"colony\" [(ngModel)]=\"colonyValue\" (ionChange)=\"updateColony(colonyValue)\"></ion-input>\r\n          \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong>+ Mineral CPs</strong>\r\n      <ion-input (ionFocus)=\"this.mineralValue = ''\" style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"mineral\" [(ngModel)]=\"mineralValue\" (ionChange)=\"updateMineral(mineralValue)\"></ion-input>\r\n      \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong>+ MS Pipe CPs</strong>\r\n      <ion-input (ionFocus)=\"this.pipeValue = ''\" style=\"text-align: center;\" type=\"number\" min={0} formControlName=\"pipe\" [(ngModel)]=\"pipeValue\" (ionChange)=\"updatePipe(pipeValue)\"></ion-input>\r\n   \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">Total {{total}}</strong></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <strong style=\"color: red;\">- Manteninance</strong>\r\n          <ion-input (ionFocus)=\"this.manteninanceValue = ''\"  style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"manteninance\" [(ngModel)]=\"manteninanceValue\" (ionChange)=\"updateManteninance(manteninanceValue)\"></ion-input>       \r\n        </ion-col>\r\n        <ion-col>\r\n          <strong style=\"color: red;\">- Turn order bid</strong>\r\n          <ion-input (ionFocus)=\"this.turnOrderBidValue = ''\" style=\"text-align: center;color: red;\" type=\"number\" min={0} formControlName=\"turnOrderBid\" [(ngModel)]=\"turnOrderBidValue\" (ionChange)=\"updateTurnOrderBid(turnOrderBidValue)\"></ion-input>     \r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col>\r\n          <div style=\"text-align: center;background-color: lightgrey;\"><strong style=\"text-align: center;\">SubTotal {{subTotal}}</strong></div>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row class=\"carryOver\">\r\n        <ion-col>\r\n          <ion-button size=\"small\" (click)=\"goToBuyShips(subTotal)\"><ion-icon name=\"airplane\"></ion-icon>&nbsp;&nbsp;Buy Ships</ion-button>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-button size=\"small\" (click)=\"goToBuyTech(subTotal)\"><ion-icon name=\"construct\"></ion-icon>&nbsp;&nbsp;Buy Techs</ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col class=\"carryOver\" style=\"color: red;\">\r\n        <strong>- CP spent on upgrades</strong>\r\n        <ion-input  (ionFocus)=\"this.updateValue = ''\" type=\"number\" min={0} formControlName=\"update\" [(ngModel)]=\"updateValue\" (ionChange)=\"updateUpdate(updateValue)\"></ion-input>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row style=\"text-align: center;background-color: lightgrey;\"> \r\n        <ion-col>\r\n          <div ><strong style=\"text-align: center;\">Remaining CP {{remaining}}</strong></div>\r\n        </ion-col>\r\n        <ion-col>\r\n          <ion-button size=\"small\" type=\"submit\" color=\"secondary\"><ion-icon name=\"save\"></ion-icon>&nbsp;&nbsp;SAVE</ion-button>\r\n         </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </form>\r\n</ion-content>\r\n");
 
 /***/ })
 

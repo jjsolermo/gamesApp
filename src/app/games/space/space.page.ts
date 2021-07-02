@@ -70,14 +70,8 @@ goToOwnerTechs(){
 goToBuyShips(cps){
   this.router.navigate(['/games/space/buy-ships', cps]);
 }
-goToBuyTechsubTotal(cps){
+goToBuyTech(cps){
   this.router.navigate(['/games/space/buy-tech', cps]);
-}
-clear(e){
-  console.log('hola')
-  if(e === 0){
-    return '';
-  }
 }
 
 public updateCarry(e) :void{

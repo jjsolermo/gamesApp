@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS  "techs" (
 	"Value"	INTEGER,
 	"Cost"	INTEGER,
 	"Description"	TEXT,
-    "Buy" BOOLEAN default 'True',
+    "Buy" BOOLEAN DEFAULT 0,
 	PRIMARY KEY("Id" AUTOINCREMENT)
 );
 INSERT or IGNORE  INTO techs ( Name, Value, Cost, Description) VALUES ('Ships Size', 2, 10, 'Can build DD,Base');
