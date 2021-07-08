@@ -179,7 +179,7 @@
       /* harmony import */
 
 
-      var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! tslib */
       64762);
       /* harmony import */
@@ -197,7 +197,7 @@
       /* harmony import */
 
 
-      var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/core */
       37716);
       /* harmony import */
@@ -209,13 +209,13 @@
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
       39895);
       /* harmony import */
 
 
-      var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @ionic/angular */
       80476);
       /* harmony import */
@@ -236,6 +236,7 @@
           this.toastController = toastController;
           this.schipList = [];
           this.techList = [];
+          this.returnValue = new _angular_core__WEBPACK_IMPORTED_MODULE_4__.EventEmitter();
           this.hull_size = 1;
           this.limit_Ship = 0;
         }
@@ -264,7 +265,7 @@
         }, {
           key: "presentModal",
           value: function presentModal(e) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
               var modal;
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -306,7 +307,7 @@
         }, {
           key: "noCpsToast",
           value: function noCpsToast() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
               var toast;
               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
@@ -333,7 +334,7 @@
         }, {
           key: "masHullToast",
           value: function masHullToast() {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
               var toast;
               return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
@@ -360,7 +361,7 @@
         }, {
           key: "buyToast",
           value: function buyToast(type, classShip) {
-            return (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            return (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
               var toast;
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
@@ -399,6 +400,7 @@
                 this.assigTech(e);
                 this.db.buyShip(e.id, 1);
                 this.buyToast(e.Type, e.Class);
+                this.returnValue.emit(this.cps);
               }
             }
           }
@@ -506,19 +508,24 @@
 
       _BuyShipsPage.ctorParameters = function () {
         return [{
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router
         }, {
-          type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.ActivatedRoute
         }, {
           type: _services_db_service__WEBPACK_IMPORTED_MODULE_2__.DbService
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ModalController
         }, {
-          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ToastController
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController
         }];
       };
 
-      _BuyShipsPage = (0, tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+      _BuyShipsPage.propDecorators = {
+        returnValue: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Output
+        }]
+      };
+      _BuyShipsPage = (0, tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
         selector: 'app-buy-ships',
         template: _raw_loader_buy_ships_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_buy_ships_page_scss__WEBPACK_IMPORTED_MODULE_1__["default"]]
@@ -540,7 +547,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = ".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n\n.caja {\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJ1eS1zaGlwcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBQTtBQUNKOztBQUVBO0VBQ0ksa0JBQUE7RUFDQSxZQUFBO0FBQ0o7O0FBQ0E7RUFDSSwrQkFBQTtBQUVKOztBQUNBO0VBQ0ksa0JBQUE7QUFFSiIsImZpbGUiOiJidXktc2hpcHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhlYWRlclNwYWNle1xyXG4gICAgZGlzcGxheTogY29udGVudHM7XHJcbn1cclxuXHJcbi5oZWFkZXJUaXRsZXtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgIG1hcmdpbjogMnJlbTtcclxufVxyXG5pb24tbWVudS1idXR0b24ge1xyXG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxufVxyXG5cclxuLmNhamF7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbiJdfQ== */";
+      __webpack_exports__["default"] = ".headerSpace {\n  display: contents;\n}\n\n.headerTitle {\n  text-align: center;\n  margin: 2rem;\n}\n\nion-menu-button {\n  color: var(--ion-color-primary);\n}\n\n.caja {\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImJ1eS1zaGlwcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBQTtBQUNKOztBQUVBO0VBQ0ksa0JBQUE7RUFDQSxZQUFBO0FBQ0o7O0FBQ0E7RUFDSSwrQkFBQTtBQUVKOztBQUNBO0VBQ0ksa0JBQUE7QUFFSiIsImZpbGUiOiJidXktc2hpcHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmhlYWRlclNwYWNle1xuICAgIGRpc3BsYXk6IGNvbnRlbnRzO1xufVxuXG4uaGVhZGVyVGl0bGV7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1hcmdpbjogMnJlbTtcbn1cbmlvbi1tZW51LWJ1dHRvbiB7XG4gICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcbn1cblxuLmNhamF7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4iXX0= */";
       /***/
     },
 
@@ -558,7 +565,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar >  \r\n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <p style=\"text-align: center;\">CP'S {{cps}}</p>\r\n  <p style=\"text-align: center;\">Click in the class for more details</p>\r\n  <ion-list>\r\n    <ion-item *ngFor=\"let ship of ships |async\">\r\n      <!--<ion-item *ngFor=\"let ship of ships\">  -->\r\n          <ion-label (click)=\"presentModal(ship)\">\r\n            <h2>{{ship.Type}}</h2>\r\n            <h3>{{ship.Class}}</h3>\r\n          </ion-label>\r\n          <ion-label>\r\n            <h2>Cost</h2>\r\n            <h3>{{ship.CP}}</h3>\r\n          </ion-label>\r\n          <ion-label>\r\n            <h2>Attack</h2>\r\n            <h3>{{ship.Attack_Strength}}</h3>\r\n          </ion-label>\r\n          <ion-label>\r\n            <h2>Defense</h2>\r\n            <h3>{{ship.Defense_Strength}}</h3>\r\n          </ion-label>\r\n          <ion-label>\r\n            <h2>Hull Size</h2>\r\n            <h3>{{ship.Hull_Size}}</h3>\r\n            <ion-label>\r\n              <ion-button class=\"headerSpace\" color=\"success\" (click)=\"buy(ship)\"><ion-icon name=\"cash\"></ion-icon></ion-button>\r\n            </ion-label> \r\n          </ion-label>                       \r\n    </ion-item>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n\r\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar >  \n    <ion-button class=\"headerSpace\" color=\"primary\" (click)=\"navigateToSapce()\"> <ion-icon name=\"arrow-back\"></ion-icon>&nbsp;&nbsp; Back</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <p style=\"text-align: center;\">CP'S {{cps}}</p>\n  <p style=\"text-align: center;\">Click in the class for more details</p>\n  <ion-list>\n    <ion-item *ngFor=\"let ship of ships |async\">\n      <!--<ion-item *ngFor=\"let ship of ships\">  -->\n          <ion-label (click)=\"presentModal(ship)\">\n            <h2>{{ship.Type}}</h2>\n            <h3>{{ship.Class}}</h3>\n          </ion-label>\n          <ion-label>\n            <h2>Cost</h2>\n            <h3>{{ship.CP}}</h3>\n          </ion-label>\n          <ion-label>\n            <h2>Attack</h2>\n            <h3>{{ship.Attack_Strength}}</h3>\n          </ion-label>\n          <ion-label>\n            <h2>Defense</h2>\n            <h3>{{ship.Defense_Strength}}</h3>\n          </ion-label>\n          <ion-label>\n            <h2>Hull Size</h2>\n            <h3>{{ship.Hull_Size}}</h3>\n            <ion-label>\n              <ion-button class=\"headerSpace\" color=\"success\" (click)=\"buy(ship)\"><ion-icon name=\"cash\"></ion-icon></ion-button>\n            </ion-label> \n          </ion-label>                       \n    </ion-item>\n  </ion-list>\n\n</ion-content>\n\n";
       /***/
     }
   }]);

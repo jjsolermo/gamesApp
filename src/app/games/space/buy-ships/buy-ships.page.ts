@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit , Output } from '@angular/core';
 import { Ship } from 'src/app/services/ship';
 import { DbService } from '../../../services/db.service';
 import { Router,ActivatedRoute} from '@angular/router';
@@ -18,6 +18,7 @@ export class BuyShipsPage implements OnInit {
   techList : Tech[] = [];
   ships:Observable<Ship[]>;
   techs:Observable<Tech[]>;
+  @Output() returnValue = new EventEmitter<any>();
   
   cps :any;
   data :any;
@@ -100,6 +101,7 @@ export class BuyShipsPage implements OnInit {
         this.assigTech(e);
         this.db.buyShip(e.id, 1);
         this.buyToast(e.Type,e.Class);
+        this.returnValue.emit(this.cps);
       }
       
     }   

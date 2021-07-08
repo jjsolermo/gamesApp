@@ -29,6 +29,8 @@ export class SpacePage implements OnInit {
   turnOrderBidValue = 0;
   updateValue = 0;
   remaining = 0;
+  buyShip = 0;
+  buyTech = 0;
 
   constructor(private router: Router, private db: DbService,) { }
 
@@ -97,6 +99,13 @@ public updateTurnOrderBid(e) :void{
 }
 public updateUpdate(e) :void{
   this.remaining = this.subTotal -  e
+}
+public doSomething(value: any):void {
+  console.log(value)
+  this.buyShip = value;
+  this.subTotal = this.total - value;
+  this.remaining = this.subTotal;
+
 }
 
 
